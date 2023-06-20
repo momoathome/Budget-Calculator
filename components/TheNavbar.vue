@@ -4,16 +4,16 @@ const { locale: currentLocale, t } = useI18n()
 </script>
 
 <template>
-  <header class="flex h-70px px-12 gap-16 justify-between items-center dark:bg-base dark:text-base_light ">
+  <header class="flex h-70px px-12 gap-8 justify-between items-center lg:gap-16 dark:bg-base dark:text-base_light">
     <div class="flex h-full flex-1">
       <nuxt-link to="/" class="flex font-bold h-full text-3xl text-sky-400 items-center no-underline">
         Snowowl
       </nuxt-link>
     </div>
 
-    <input id="nav-check" type="checkbox" class="nav-check">
+    <input id="nav-check" type="checkbox" class="nav-check hidden">
     <label id="label-nav-check" for="nav-check">
-      <div class="hamb">
+      <div class="hamb hidden">
         <span class="hamb-line line1" />
         <span class="hamb-line line2" />
         <span class="hamb-line line3" />
@@ -63,16 +63,8 @@ header {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.nav-check {
-  display: none;
-}
-
-.hamb {
-  display: none;
-}
-
 /* Responsive */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   header {
     padding-inline: 1rem;
     position: relative;

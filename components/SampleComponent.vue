@@ -30,6 +30,3 @@ const { increment, decrement, reset, double } = store
     </div>
   </div>
 </template>
-
-<style>
-</style>
