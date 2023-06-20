@@ -1,12 +1,12 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="h-32vh w-full hexacon overflow-hidden">
-    <div class="inline-flex overflow-hidden ms--50px [&:nth-child(even)]:ms-1px not-first-of-type:mt--32px" v-for="hexaRow of 5">
-      <div class="bg-#111 h-110px m-1px w-100px transition-duration-2s hexagon relative hover:bg-[#0f0]" v-for="hexagon of 26"/>
+    <div v-for="hexaRow of 5" class="inline-flex overflow-hidden ms--50px [&:nth-child(even)]:ms-1px not-first-of-type:mt--32px">
+      <div v-for="hexagon of 26" class="bg-#111 h-110px m-1px w-100px transition-duration-2s hexagon relative hover:bg-[#0f0]" />
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped>
 .hexacon {

@@ -1,38 +1,43 @@
 <script setup lang="ts">
-const { toggle } = useDark();
-const { locale: currentLocale, t } = useI18n();
+const { toggle } = useDark()
+const { locale: currentLocale, t } = useI18n()
 </script>
 
 <template>
-  <header>
-    <div class="nav-logo-wrapper">
-      <nuxt-link to="/" class="nav-logo">Snowowl</nuxt-link>
+  <header class="flex h-70px px-12 gap-16 justify-between items-center dark:bg-base dark:text-base_light ">
+    <div class="flex h-full flex-1">
+      <nuxt-link to="/" class="flex font-bold h-full text-3xl text-sky-400 items-center no-underline">
+        Snowowl
+      </nuxt-link>
     </div>
 
-    <input type="checkbox" class="nav-check" id="nav-check" />
-    <label for="nav-check" id="label-nav-check">
+    <input id="nav-check" type="checkbox" class="nav-check">
+    <label id="label-nav-check" for="nav-check">
       <div class="hamb">
-        <span class="hamb-line line1"></span>
-        <span class="hamb-line line2"></span>
-        <span class="hamb-line line3"></span>
+        <span class="hamb-line line1" />
+        <span class="hamb-line line2" />
+        <span class="hamb-line line3" />
       </div>
     </label>
 
-    <nav class="nav-links">
-      <nuxt-link to="/about">
+    <nav class="flex h-full text-18px nav-links">
+      <nuxt-link to="/" class="nav-item">
+        Home
+      </nuxt-link>
+      <nuxt-link to="/about" class="nav-item">
         {{ t("global.about") }}
       </nuxt-link>
-      <a href="#" target="_blank">Stackoverflow</a>
-      <a href="#" target="_blank">LinkedIn</a>
-      <a href="https://codepen.io/momoathome/pen/JjMOxEP" target="_blank">Codepen</a>
+      <a href="#" class="nav-item" target="_blank">Stackoverflow</a>
+      <a href="#" class="nav-item" target="_blank">LinkedIn</a>
+      <a href="https://codepen.io/momoathome/pen/JjMOxEP" class="nav-item" target="_blank">Codepen</a>
     </nav>
 
     <div class="flex flex-row gap-2">
       <select
+        id="languageListBox"
         v-model="currentLocale"
         role="listbox"
         tabindex="0"
-        id="languageListBox"
         aria-labelledby="languageListBox"
         class="rounded-lg list py-1 px-2 dark:bg-base"
       >
@@ -55,55 +60,7 @@ const { locale: currentLocale, t } = useI18n();
 
 <style scoped>
 header {
-  background-color: rgb(var(--test));
-  height: 70px;
-  padding-inline: 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-a {
-  text-decoration: none;
-  color: rgb(var(--test));
-}
-.nav-logo-wrapper {
-  display: flex;
-  flex: 1;
-  height: 100%;
-}
-
-.nav-logo {
-  display: flex;
-  font-size: 22px;
-  height: 100%;
-  font-weight: 700;
-  align-items: center;
-}
-
-.nav-links {
-  display: flex;
-  font-size: 18px;
-  height: 100%;
-}
-
-.nav-links > a {
-  padding-inline: 0.75rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  transition: 200ms ease-in;
-}
-
-.nav-links > a:hover {
-  background-color: var(--gray);
-}
-
-.dark .nav-links > a:hover {
-  color: rgb(var(--base));
 }
 
 .nav-check {
@@ -127,7 +84,7 @@ a {
     gap: 1rem;
     width: 100%;
     height: 0px;
-    background-color: var(--gray);
+    background-color: var(--grey);
     transition: all 0.3s ease-in;
     overflow-y: hidden;
     top: 0;
@@ -162,7 +119,7 @@ a {
   }
 
   .hamb-line {
-    background: rgb(var(--base));
+    background: var(--base);
     position: absolute;
     left: 0;
     padding: 0;
@@ -173,7 +130,7 @@ a {
   }
 
   .dark .hamb-line {
-    background: rgb(var(--base-light));
+    background: var(--base-light);
   }
 
   .line1 {

@@ -26,9 +26,7 @@ export default defineNuxtConfig({
   // ssr: false,
 
   // global CSS files
-  css: [
-    '~/assets/normalize.css', '~/assets/main.css',
-  ],
+  css: ['~/assets/normalize.css', '~/assets/main.css'],
 
   // plugin configurations
   modules: [
@@ -57,7 +55,7 @@ export default defineNuxtConfig({
     ],
   },
   macros: {
-/*     exportProps: true,
+    /*     exportProps: true,
     reactivityTransform: true, */
   },
   colorMode: {

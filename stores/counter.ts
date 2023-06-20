@@ -1,5 +1,5 @@
 export const useCounterStore = defineStore('counter', () => {
-  let count = ref(0)
+  const count = ref(0)
 
   function increment() {
     count.value++
