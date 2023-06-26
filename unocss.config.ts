@@ -15,7 +15,7 @@ import {
 export default defineConfig({
 
   shortcuts: [
-    ['btn', 'px-4 py-2 font-medium text-sm tracking-wide text-white capitalize transition-colors transform bg-primary rounded-md border-none no-underline hover:bg-primary_dark focus:( outline-none ring ring-teal-300 ring-opacity-80 )'],
+    ['btn', 'px-4 py-2 font-medium text-sm tracking-wide text-white capitalize transition-colors transform bg-primary rounded-md border-none no-underline hover:bg-primary_light focus:( outline-none ring ring-teal-300 ring-opacity-80 )'],
     ['icon-btn', 'hover:text-violet-500 dark:hover:text-primary p-0 bg-transparent inline-block select-none border-none opacity-75 transition duration-200 ease-in-out hover:opacity-100'],
     ['list', 'list-disc list-inside'],
     ['flex-center', 'flex items-center justify-center'],
@@ -57,7 +57,9 @@ export default defineConfig({
       base_light: 'var(--base-light)',
       primary: 'var(--primary)',
       primary_dark: 'var(--primary-dark)',
+      primary_light: 'var(--primary-light)',
       secondary: 'var(--secondary)',
+      secondary_dark: 'var(--secondary-dark)',
       dark_nav_accent: 'var(--dark-nav-accent)',
       dark_nav_accent_divider: 'var(--dark-nav-accent-divider)',
     },

@@ -5,7 +5,7 @@
     <!-- <daisy-u-i-navbar /> -->
 
     <div class="flex h-[calc(100vh-70px)] items-center justify-center">
-      <div class="rounded-xl bg-light-100 border-1 border-opacity-25% shadow-md p-10 w-100 sm:w-125 lg:w-170 dark:bg-slate-800 dark:text-base_light">
+      <div class="bg-secondary rounded-xl border-1 border-opacity-25% shadow-md p-10 text-[rgb(181,205,245)] w-100 sm:w-125 lg:w-170 dark:bg-secondary_dark dark:text-base_light">
         <slot />
       </div>
     </div>

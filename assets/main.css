@@ -12,11 +12,13 @@ select, [role="listbox"] {
 }
 
 :root {
-  --base: rgb(18, 18, 18);
+  --base: rgb(26, 26, 26);
   --base-light: rgb(244, 244, 245); 
   --primary: rgb(14, 165, 233);
-  --primary_dark: rgb(14, 165, 233);
-  --secondary: rgb(30, 41, 59);
+  --primary-dark: rgb(10, 122, 174);
+  --primary-light: rgb(77, 191, 245);
+  --secondary: rgb(41, 45, 62);
+  --secondary-dark: rgb(36, 36, 36);
   --dark-nav-accent: rgba(235, 235, 235, .6);
   --dark-nav-accent-divider: rgba(235, 235, 235, .2);
 }

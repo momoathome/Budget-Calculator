@@ -8,11 +8,11 @@ const { locale: currentLocale, t } = useI18n()
 
     <div class="flex-center flex-col h-[calc(100vh-70px)] gap-12 dark:bg-base">
       <main class="flex flex-col flex-1 mt-24 gap-20">
-        <h1 class="font-extrabold text-5xl dark:text-base_light">
+        <h1 class="font-extrabold text-center text-5xl dark:text-base_light">
           {{ t("main.title") }} <span>Snowowl</span>
         </h1>
 
-        <!-- <sample-component /> -->
+        <sample-component />
       </main>
 
       <!-- <hexa-component /> -->

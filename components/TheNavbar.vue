@@ -66,7 +66,7 @@ function toggleDropdownOnHover() {
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
-        <div class="flex flex-col dropDown-shadow md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute " :class="[open ? 'visible block' : 'invisible hidden']" aria-label="submenu">
+        <div class="flex flex-col dropDown-shadow md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute dark:md:bg-base " :class="[open ? 'visible block' : 'invisible hidden']" aria-label="submenu">
           <nuxt-link to="" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>
