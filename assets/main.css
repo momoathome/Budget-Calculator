@@ -17,7 +17,8 @@ select, [role="listbox"] {
   --primary: rgb(14, 165, 233);
   --primary_dark: rgb(14, 165, 233);
   --secondary: rgb(30, 41, 59);
-  --grey: rgb(226, 232, 240);
+  --dark-nav-accent: rgba(235, 235, 235, .6);
+  --dark-nav-accent-divider: rgba(235, 235, 235, .2);
 }
 
 .dark {

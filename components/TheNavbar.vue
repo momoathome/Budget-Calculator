@@ -1,26 +1,56 @@
 <script setup lang="ts">
 const { toggle } = useDark()
 const { locale: currentLocale, t } = useI18n()
+const isActive = ref(false)
+const open = ref(false)
+
+const { width } = useWindowSize()
+
+const breakpoints = {
+  tablet: 768,
+  laptop: 1024,
+  desktop: 1280,
+}
+
+function toggleDropdownOpen() {
+  if (unref(width) <= breakpoints.tablet)
+    open.value = !open.value
+}
+
+function toggleDropdownOnHover() {
+  if (unref(width) > breakpoints.tablet)
+    open.value = !open.value
+}
 </script>
 
 <template>
-  <header class="flex h-70px px-12 gap-8 justify-between items-center lg:gap-16 dark:bg-base dark:text-base_light">
-    <div class="flex h-full flex-1">
-      <nuxt-link to="/" class="flex font-bold h-full text-3xl text-sky-400 items-center no-underline">
-        Snowowl
-      </nuxt-link>
-    </div>
+  <header class="flex h-70px px-4 gap-8 box-shadow justify-between md:px-12 md:items-center lg:gap-16 dark:bg-base dark:text-base_light">
+    <!-- Logo -->
+    <nuxt-link to="/" class="flex font-bold h-full flex-1 text-3xl text-sky-400 items-center no-underline">
+      Snowowl
+    </nuxt-link>
 
-    <input id="nav-check" type="checkbox" class="nav-check hidden">
-    <label id="label-nav-check" for="nav-check">
-      <div class="hamb hidden">
-        <span class="hamb-line line1" />
-        <span class="hamb-line line2" />
-        <span class="hamb-line line3" />
+    <!-- Mobile Menu Toggle -->
+    <!--     <input id="nav-check" type="checkbox" class="nav-check hidden">
+    <label id="label-nav-check" for="nav-check" aria-label="mobile menu toggle" class="md:hidden">
+      <div class="hamb hidden" aria-hidden="true">
+        <span class="hamb-line line1" aria-hidden="true" />
+        <span class="hamb-line line2" aria-hidden="true" />
+        <span class="hamb-line line3" aria-hidden="true" />
       </div>
-    </label>
+    </label> -->
 
-    <nav class="flex h-full text-18px nav-links">
+    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isActive }" class="bg-transparent border-none h-full hamburger-toggle md:hidden" :aria-expanded="isActive" @click="isActive = !isActive">
+      <span class="hamburger-container" aria-hidden="true">
+        <span class="hamb-line hamb-line-top" aria-hidden="true" />
+        <span class="hamb-line hamb-line-middle" aria-hidden="true" />
+        <span class="hamb-line hamb-line-bottom" aria-hidden="true" />
+      </span>
+    </button>
+
+    <!-- TODO active klasse setzen -->
+    <!-- Navigation -->
+    <nav class="bg-white flex h-full main-nav dark:bg-base">
       <nuxt-link to="/" class="nav-item">
         Home
       </nuxt-link>
@@ -29,85 +59,143 @@ const { locale: currentLocale, t } = useI18n()
       </nuxt-link>
       <a href="#" class="nav-item" target="_blank">Stackoverflow</a>
       <a href="#" class="nav-item" target="_blank">LinkedIn</a>
+
+      <!-- Dropdown -->
+      <div class="cursor-pointer flex-col relative nav-item block md:flex" :class="[open ? 'h-auto <md:pb-0' : 'h-52px md:h-full']" @click="toggleDropdownOpen()" @mouseenter="toggleDropdownOnHover()" @mouseleave="toggleDropdownOnHover()">
+        <div class="flex items-center md:h-full">
+          <span aria-haspopup="true">DropDown</span>
+          <div i="tabler-caret-down" />
+        </div>
+        <div class="flex flex-col dropDown-shadow md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute " :class="[open ? 'visible block' : 'invisible hidden']" aria-label="submenu">
+          <nuxt-link to="" class="nav-dropdown" target="_blank">
+            Dropdown
+          </nuxt-link>
+          <nuxt-link to="" class="nav-dropdown" target="_blank">
+            Dropdown
+          </nuxt-link>
+          <nuxt-link to="" class="nav-dropdown" target="_blank">
+            Dropdown
+          </nuxt-link>
+        </div>
+      </div>
+
       <a href="https://codepen.io/momoathome/pen/JjMOxEP" class="nav-item" target="_blank">Codepen</a>
+
+      <div class="flex flex-col pt-3 gap-3 md:flex-row md:p-0 md:gap-0">
+        <!-- Language toggle -->
+        <div class="flex bg-#f9f9f9 rounded-2 py-3 px-3 transition transition-duration-200 language justify-between items-center md:bg-transparent dark:bg-#242424 dark:md:bg-transparent">
+          <p for="languageListBox" class="font-medium m-0 text-sm text-dark-900/60 md:hidden dark:text-dark_nav_accent">
+            Translation
+          </p>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 8l6 6m-7 0l6-6l2-3M2 5h12M7 2h1m14 20l-5-10l-5 10m2-4h6" /></svg>
+            <select
+              id="languageListBox"
+              v-model="currentLocale"
+              role="listbox"
+              tabindex="0"
+              aria-labelledby="languageListBox"
+              class="bg-transparent border-none rounded-lg list p-2 md:text-18px"
+            >
+              <option
+                v-for="locale of availableLocales"
+                :key="locale"
+                :value="locale"
+                role="option"
+              >
+                {{ locale }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Darkmode toggle -->
+        <div class="flex bg-#f9f9f9 rounded-2 py-3 px-3 transition transition-duration-200 justify-between items-center md:bg-transparent dark:bg-#242424 dark:md:bg-transparent">
+          <p for="languageListBox" class="font-medium m-0 text-sm text-dark-900/60 md:hidden dark:text-dark_nav_accent">
+            Appearence
+          </p>
+          <button id="darkModeToggle" type="button" class="flex text-7 icon-btn items-center" @click="toggle()">
+            <div i="tabler-sun dark:tabler-moon" />
+          </button>
+        </div>
+      </div>
     </nav>
-
-    <div class="flex flex-row gap-2">
-      <select
-        id="languageListBox"
-        v-model="currentLocale"
-        role="listbox"
-        tabindex="0"
-        aria-labelledby="languageListBox"
-        class="rounded-lg list py-1 px-2 dark:bg-base"
-      >
-        <option
-          v-for="locale of availableLocales"
-          :key="locale"
-          :value="locale"
-          role="option"
-        >
-          {{ locale }}
-        </option>
-      </select>
-
-      <button type="button" class="text-8 icon-btn" @click="toggle()">
-        <div i="tabler-sun dark:tabler-moon" />
-      </button>
-    </div>
   </header>
 </template>
 
 <style scoped>
-header {
+.box-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+.dropDown-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.open {
+  height: auto;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+
+  .language::before {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(18, 18, 18, .3);
+    content: "";
+    margin-right: 8px;
+  }
+  .language::after {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(18, 18, 18, .3);
+    content: "";
+    margin-left: 2px;
+  }
+
+  .dark .language::before {
+    background-color: var(--dark-nav-accent);
+  }
+
+  .dark .language::after {
+    background-color: var(--dark-nav-accent);
+  }
+
+}
 /* Responsive */
 @media (max-width: 768px) {
-  header {
-    padding-inline: 1rem;
-    position: relative;
+
+  .dropDown-shadow {
+    box-shadow: none
   }
-  .nav-links {
+
+  .main-nav {
     position: absolute;
     flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
+    padding-inline: 1.5rem;
     width: 100%;
     height: 0px;
-    background-color: var(--grey);
-    transition: all 0.3s ease-in;
+    transition: all 0.2s ease-in;
     overflow-y: hidden;
-    top: 0;
+    top: 70px;
     left: 0;
     z-index: 25;
   }
-  .nav-links > a {
-    display: flex;
-    justify-content: center;
-    font-size: 1.5rem;
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
-    height: max-content;
-  }
-  .nav-check:not(:checked) ~ .nav-links {
+
+  .hamburger-toggle.is-active ~ .main-nav {
     height: 0px;
   }
-  .nav-check:checked ~ .nav-links {
-    height: 100vh;
+  .hamburger-toggle.is-active ~ .main-nav {
+    height: calc(100dvh - 70px);
     overflow-y: hidden;
   }
 
   /* Hamburger Menu */
-  .hamb {
+  .hamburger-container {
     display: block;
-    cursor: pointer;
-    margin: 0 auto;
     width: 30px;
     height: 20px;
     position: relative;
-    z-index: 50;
   }
 
   .hamb-line {
@@ -125,28 +213,28 @@ header {
     background: var(--base-light);
   }
 
-  .line1 {
+  .hamb-line-top {
     top: 0;
     width: 22px;
   }
-  .line2 {
+  .hamb-line-middle {
     top: 8px;
     width: 16px;
   }
-  .line3 {
+  .hamb-line-bottom {
     bottom: 0;
   }
 
-  .nav-check:checked + label > .hamb > .line1 {
+  .hamburger-toggle.is-active .hamb-line-top {
     transform: rotate(45deg);
     transform-origin: 5%;
     width: 25.5px;
   }
-  .nav-check:checked + label > .hamb > .line2 {
+  .hamburger-toggle.is-active .hamb-line-middle {
     transform: translateX(-24px);
     background-color: transparent;
   }
-  .nav-check:checked + label > .hamb > .line3 {
+  .hamburger-toggle.is-active .hamb-line-bottom {
     transform-origin: 5%;
     transform: rotate(-45deg);
     width: 25.5px;
