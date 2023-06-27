@@ -12,7 +12,7 @@ const { locale: currentLocale, t } = useI18n()
           {{ t("main.title") }} <span>Snowowl</span>
         </h1>
 
-        <!-- <sample-component /> -->
+        <sample-component />
       </main>
 
       <!-- <hexa-component /> -->

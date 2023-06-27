@@ -24,7 +24,7 @@ const isDropdownOpen = ref(false)
 
     <!-- TODO active klasse setzen -->
     <!-- Navigation -->
-    <nav class="bg-white flex flex-col h-0 w-full opacity-0 px-6 transition-all top-70px ease-in left-0 z-1000 transition-duration-200 main-nav absolute md:flex-row md:h-full md:w-auto md:opacity-100 md:px-0 md:transition-none md:static dark:bg-base">
+    <nav class="bg-white flex flex-col h-0 w-full opacity-0 px-6 transition-all top-70px ease-in left-0 z-1000 transition-duration-200 main-nav absolute md:flex-row md:h-full md:w-auto md:opacity-100 md:px-0 md:transition-none md:z-0 md:static dark:bg-base">
       <nuxt-link to="/" class="nav-item">
         Home
       </nuxt-link>
@@ -100,6 +100,9 @@ const isDropdownOpen = ref(false)
 </template>
 
 <style scoped>
+.router-link-exact-active {
+  color: var(--primary) !important;
+}
 .box-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

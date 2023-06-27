@@ -12,7 +12,7 @@ const { increment, decrement, reset, double } = store
       </h2>
 
       <div class="justify-end">
-        <div class="flex-center flex-row gap-5">
+        <div class="flex-center flex-row flex-wrap gap-5">
           <button class="btn" @click="increment">
             Increment
           </button>
