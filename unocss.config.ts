@@ -20,7 +20,7 @@ export default defineConfig({
     ['list', 'list-disc list-inside'],
     ['flex-center', 'flex items-center justify-center'],
     ['grid-center', 'grid place-items-center'],
-    ['nav-item', 'text-base dark:text-base_light flex font-600 py-3 text-1.125rem <md:border-b-solid border-b-dark-900/15 dark:border-b-dark_nav_accent_divider <md:border-b-1 transition transition-duration-200 md:px-3 md:h-full md:items-center hover:text-primary dark:hover:text-primary'],
+    ['nav-item', 'text-base dark:text-base_light flex font-600 py-3 text-1.125rem <lg:text-1rem <md:border-b-solid border-b-dark-900/15 dark:border-b-dark_nav_accent_divider <md:border-b-1 transition transition-duration-200 md:px-3 md:h-full md:items-center hover:text-primary dark:hover:text-primary'],
     ['nav-dropdown', 'text-base dark:text-base_light font-600 transition transition-duration-200 hover:text-primary dark:hover:text-primary px-3 py-2.5 md:px-5 md:py-1.5'],
   ],
   presets: [

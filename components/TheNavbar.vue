@@ -1,36 +1,20 @@
 <script setup lang="ts">
 const { toggle } = useDark()
 const { locale: currentLocale, t } = useI18n()
-const isActive = ref(false)
+const isMobileMenuActive = ref(false)
 const isDropdownOpen = ref(false)
-
-const breakpoints = useBreakpoints({
-  tablet: 768,
-  laptop: 1024,
-  desktop: 1280,
-})
-
-const isMobileView = breakpoints.smallerOrEqual('tablet')
-
-function toggleDropdownOnClickInMobile() {
-  if (isMobileView.value)
-    isDropdownOpen.value = !isDropdownOpen.value
-}
-
-function toggleDropdownOnHoverInDesktop() {
-  if (!isMobileView.value)
-    isDropdownOpen.value = !isDropdownOpen.value
-}
 </script>
 
 <template>
-  <header class="flex h-70px px-4 gap-8 box-shadow justify-between md:px-12 md:items-center lg:gap-16 dark:bg-base dark:text-base_light">
-    <!-- Logo -->
-    <nuxt-link to="/" class="flex font-bold h-full flex-1 text-3xl text-sky-400 items-center no-underline">
-      Snowowl
-    </nuxt-link>
+  <header class="flex h-70px px-4 box-shadow justify-between md:items-center lg:px-12 dark:bg-base dark:text-base_light">
+    <div class="flex flex-1">
+      <!-- Logo -->
+      <nuxt-link to="/" class="flex font-bold h-full text-3xl text-sky-400 items-center no-underline">
+        Snowowl
+      </nuxt-link>
+    </div>
 
-    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isActive }" class="bg-transparent border-none h-full hamburger-toggle md:hidden" :aria-expanded="isActive" @click="isActive = !isActive">
+    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }" class="bg-transparent border-none h-full hamburger-toggle md:hidden" :aria-expanded="isMobileMenuActive" @click="isMobileMenuActive = !isMobileMenuActive">
       <span class="hamburger-container" aria-hidden="true">
         <span class="hamb-line hamb-line-top" aria-hidden="true" />
         <span class="hamb-line hamb-line-middle" aria-hidden="true" />
@@ -40,7 +24,7 @@ function toggleDropdownOnHoverInDesktop() {
 
     <!-- TODO active klasse setzen -->
     <!-- Navigation -->
-    <nav class="bg-white flex h-full main-nav dark:bg-base">
+    <nav class="bg-white flex flex-col h-0 w-full opacity-0 px-6 transition-all top-70px ease-in left-0 z-1000 transition-duration-200 main-nav absolute md:flex-row md:h-full md:w-auto md:opacity-100 md:px-0 md:transition-none md:static dark:bg-base">
       <nuxt-link to="/" class="nav-item">
         Home
       </nuxt-link>
@@ -51,12 +35,12 @@ function toggleDropdownOnHoverInDesktop() {
       <a href="#" class="nav-item" target="_blank">LinkedIn</a>
 
       <!-- Dropdown -->
-      <div class="cursor-pointer flex-col relative nav-item block md:flex" :class="[isDropdownOpen ? 'h-auto <md:pb-0' : 'h-52px md:h-full']" @click="toggleDropdownOnClickInMobile()" @mouseenter="toggleDropdownOnHoverInDesktop()" @mouseleave="toggleDropdownOnHoverInDesktop()">
+      <div class="cursor-pointer flex-col h-52px relative nav-item block group md:flex md:h-full hover:md:h-auto hover:<md:pb-0" :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
         <div class="flex items-center md:h-full">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
-        <div class="flex flex-col dropDown-shadow md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute dark:md:bg-base" :class="[isDropdownOpen ? 'visible block' : 'invisible hidden']" aria-label="submenu">
+        <div class="flex flex-col dropDown-shadow invisible hidden md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute dark:md:bg-base group-hover:md:flex group-hover:md:visible" :class="{ '<md:visible! <md:flex!': isDropdownOpen }" aria-label="submenu">
           <nuxt-link to="" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>
@@ -73,12 +57,12 @@ function toggleDropdownOnHoverInDesktop() {
 
       <div class="flex flex-col pt-3 gap-3 md:flex-row md:p-0 md:gap-0">
         <!-- Language toggle -->
-        <div class="flex bg-#f9f9f9 rounded-2 py-3 px-3 transition transition-duration-200 language justify-between items-center md:bg-transparent dark:bg-#242424 dark:md:bg-transparent">
+        <div class="flex bg-#f9f9f9 rounded-2 transition transition-duration-200 language justify-between items-center md:bg-transparent <md:py-3 <md:px-3 dark:bg-#242424 dark:md:bg-transparent">
           <p for="languageListBox" class="font-medium m-0 text-sm text-dark-900/60 md:hidden dark:text-dark_nav_accent">
             Translation
           </p>
-          <div>
-            <label for="languageListBox">
+          <div class="flex">
+            <label for="languageListBox" class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 8l6 6m-7 0l6-6l2-3M2 5h12M7 2h1m14 20l-5-10l-5 10m2-4h6" /></svg>
             </label>
             <select
@@ -87,7 +71,7 @@ function toggleDropdownOnHoverInDesktop() {
               role="listbox"
               tabindex="0"
               aria-labelledby="languageListBox"
-              class="bg-transparent border-none rounded-lg list p-2 md:text-18px"
+              class="bg-transparent border-none rounded-lg list p-0.3rem md:p-2 md:text-18px"
             >
               <option
                 v-for="locale of availableLocales"
@@ -156,25 +140,9 @@ function toggleDropdownOnHoverInDesktop() {
   .dropDown-shadow {
     box-shadow: none
   }
-
-  .main-nav {
-    position: absolute;
-    flex-direction: column;
-    padding-inline: 1.5rem;
-    width: 100%;
-    height: 0px;
-    transition: all 0.2s ease-in;
-    overflow-y: hidden;
-    top: 70px;
-    left: 0;
-    z-index: 25;
-  }
-
-  .hamburger-toggle.is-active ~ .main-nav {
-    height: 0px;
-  }
   .hamburger-toggle.is-active ~ .main-nav {
     height: calc(100dvh - 70px);
+    opacity: 1;
     overflow-y: hidden;
   }
 
