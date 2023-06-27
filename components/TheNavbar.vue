@@ -2,24 +2,24 @@
 const { toggle } = useDark()
 const { locale: currentLocale, t } = useI18n()
 const isActive = ref(false)
-const open = ref(false)
+const isDropdownOpen = ref(false)
 
-const { width } = useWindowSize()
-
-const breakpoints = {
+const breakpoints = useBreakpoints({
   tablet: 768,
   laptop: 1024,
   desktop: 1280,
+})
+
+const isMobileView = breakpoints.smallerOrEqual('tablet')
+
+function toggleDropdownOnClickInMobile() {
+  if (isMobileView.value)
+    isDropdownOpen.value = !isDropdownOpen.value
 }
 
-function toggleDropdownOpen() {
-  if (unref(width) <= breakpoints.tablet)
-    open.value = !open.value
-}
-
-function toggleDropdownOnHover() {
-  if (unref(width) > breakpoints.tablet)
-    open.value = !open.value
+function toggleDropdownOnHoverInDesktop() {
+  if (!isMobileView.value)
+    isDropdownOpen.value = !isDropdownOpen.value
 }
 </script>
 
@@ -29,16 +29,6 @@ function toggleDropdownOnHover() {
     <nuxt-link to="/" class="flex font-bold h-full flex-1 text-3xl text-sky-400 items-center no-underline">
       Snowowl
     </nuxt-link>
-
-    <!-- Mobile Menu Toggle -->
-    <!--     <input id="nav-check" type="checkbox" class="nav-check hidden">
-    <label id="label-nav-check" for="nav-check" aria-label="mobile menu toggle" class="md:hidden">
-      <div class="hamb hidden" aria-hidden="true">
-        <span class="hamb-line line1" aria-hidden="true" />
-        <span class="hamb-line line2" aria-hidden="true" />
-        <span class="hamb-line line3" aria-hidden="true" />
-      </div>
-    </label> -->
 
     <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isActive }" class="bg-transparent border-none h-full hamburger-toggle md:hidden" :aria-expanded="isActive" @click="isActive = !isActive">
       <span class="hamburger-container" aria-hidden="true">
@@ -61,12 +51,12 @@ function toggleDropdownOnHover() {
       <a href="#" class="nav-item" target="_blank">LinkedIn</a>
 
       <!-- Dropdown -->
-      <div class="cursor-pointer flex-col relative nav-item block md:flex" :class="[open ? 'h-auto <md:pb-0' : 'h-52px md:h-full']" @click="toggleDropdownOpen()" @mouseenter="toggleDropdownOnHover()" @mouseleave="toggleDropdownOnHover()">
+      <div class="cursor-pointer flex-col relative nav-item block md:flex" :class="[isDropdownOpen ? 'h-auto <md:pb-0' : 'h-52px md:h-full']" @click="toggleDropdownOnClickInMobile()" @mouseenter="toggleDropdownOnHoverInDesktop()" @mouseleave="toggleDropdownOnHoverInDesktop()">
         <div class="flex items-center md:h-full">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
-        <div class="flex flex-col dropDown-shadow md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute dark:md:bg-base " :class="[open ? 'visible block' : 'invisible hidden']" aria-label="submenu">
+        <div class="flex flex-col dropDown-shadow md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute dark:md:bg-base" :class="[isDropdownOpen ? 'visible block' : 'invisible hidden']" aria-label="submenu">
           <nuxt-link to="" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>
@@ -88,7 +78,9 @@ function toggleDropdownOnHover() {
             Translation
           </p>
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 8l6 6m-7 0l6-6l2-3M2 5h12M7 2h1m14 20l-5-10l-5 10m2-4h6" /></svg>
+            <label for="languageListBox">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 8l6 6m-7 0l6-6l2-3M2 5h12M7 2h1m14 20l-5-10l-5 10m2-4h6" /></svg>
+            </label>
             <select
               id="languageListBox"
               v-model="currentLocale"
@@ -130,10 +122,6 @@ function toggleDropdownOnHover() {
 
 .dropDown-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-.open {
-  height: auto;
-  opacity: 1;
 }
 
 @media (min-width: 768px) {
