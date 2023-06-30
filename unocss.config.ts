@@ -17,7 +17,7 @@ export default defineConfig({
 
   shortcuts: [
     ['btn', 'px-4 py-2 font-medium text-sm tracking-wide capitalize transition-colors text-white transform bg-primary rounded-md border-none no-underline hover:bg-primary_light focus:( outline-none ring ring-teal-300 ring-opacity-80 )'],
-    ['icon-btn', 'hover:text-violet-500 dark:hover:text-primary p-0 bg-transparent inline-block select-none border-none opacity-75 transition duration-200 ease-in-out hover:opacity-100'],
+    ['icon-btn', 'p-0 bg-transparent inline-block select-none border-none opacity-75 transition duration-200 ease-in-out hover:opacity-100'],
     ['list', 'list-disc list-inside'],
     ['flex-center', 'flex items-center justify-center'],
     ['grid-center', 'grid place-items-center'],
