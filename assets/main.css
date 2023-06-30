@@ -12,8 +12,8 @@ select, [role="listbox"] {
 }
 
 :root {
-  --base: rgb(26, 26, 26);
-  --base-light: rgb(244, 244, 245); 
+  --base: rgb(244, 244, 245);
+  --base-dark: rgb(26, 26, 26);
   --primary: rgb(14, 165, 233);
   --primary-dark: rgb(10, 122, 174);
   --primary-light: rgb(77, 191, 245);
@@ -23,9 +23,31 @@ select, [role="listbox"] {
   --dark-nav-accent-divider: rgba(235, 235, 235, .2);
 }
 
-.dark {
-  background-color: rgb(var(--base));
-  color: rgb(var(--base-light));
+html {
+  background-color: var(--base);
+  color: var(--base-dark);
 }
 
+html.dark {
+  --base: rgb(26, 26, 26);
+  --base-dark: rgb(244, 244, 245);
+  --secondary: rgb(36, 36, 36);
+}
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
+}

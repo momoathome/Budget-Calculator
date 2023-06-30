@@ -1,20 +1,19 @@
 <script setup lang="ts">
-const { toggle } = useDark()
 const { locale: currentLocale, t } = useI18n()
 const isMobileMenuActive = ref(false)
 const isDropdownOpen = ref(false)
 </script>
 
 <template>
-  <header class="flex h-70px px-4 box-shadow justify-between md:items-center lg:px-12 dark:bg-base dark:text-base_light">
+  <header class="box-shadow h-70px flex justify-between bg-base bg-base px-4 md:items-center lg:px-12">
     <div class="flex flex-1">
       <!-- Logo -->
-      <nuxt-link to="/" class="flex font-bold h-full text-3xl text-sky-400 items-center no-underline">
+      <nuxt-link to="/" class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline">
         Snowowl
       </nuxt-link>
     </div>
 
-    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }" class="bg-transparent border-none h-full hamburger-toggle md:hidden" :aria-expanded="isMobileMenuActive" @click="isMobileMenuActive = !isMobileMenuActive">
+    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }" class="hamburger-toggle h-full border-none bg-transparent md:hidden" :aria-expanded="isMobileMenuActive" @click="isMobileMenuActive = !isMobileMenuActive">
       <span class="hamburger-container" aria-hidden="true">
         <span class="hamb-line hamb-line-top" aria-hidden="true" />
         <span class="hamb-line hamb-line-middle" aria-hidden="true" />
@@ -22,26 +21,25 @@ const isDropdownOpen = ref(false)
       </span>
     </button>
 
-    <!-- TODO active klasse setzen -->
     <!-- Navigation -->
-    <nav class="bg-white flex flex-col h-0 w-full opacity-0 px-6 transition-all top-70px ease-in left-0 z-1000 transition-duration-200 main-nav absolute md:flex-row md:h-full md:w-auto md:opacity-100 md:px-0 md:transition-none md:z-0 md:static dark:bg-base">
+    <nav class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:static md:z-0 md:h-full md:w-auto md:flex-row md:px-0 md:opacity-100 md:transition-none">
       <nuxt-link to="/" class="nav-item">
         Home
       </nuxt-link>
-      <nuxt-link to="/about" class="nav-item">
+      <nuxt-link to="" class="nav-item">
         {{ t("global.about") }}
       </nuxt-link>
       <a href="#" class="nav-item" target="_blank">Stackoverflow</a>
       <a href="#" class="nav-item" target="_blank">LinkedIn</a>
 
       <!-- Dropdown -->
-      <div class="cursor-pointer flex-col h-52px relative nav-item block group md:flex md:h-full hover:md:h-auto hover:<md:pb-0" :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
-        <div class="flex items-center md:h-full">
+      <div class="group relative block h-52px flex-col cursor-pointer md:h-full md:flex hover:md:h-auto nav-item hover:<md:pb-0" :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
+        <div class="flex items-center md:h-full" :class="{ '<md:pb-2.5': isDropdownOpen }">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
-        <div class="flex flex-col dropDown-shadow invisible hidden md:bg-white md:p-2 md:top-65px md:left-0 md:w-210px md:absolute dark:md:bg-base group-hover:md:flex group-hover:md:visible" :class="{ '<md:visible! <md:flex!': isDropdownOpen }" aria-label="submenu">
-          <nuxt-link to="" class="nav-dropdown" target="_blank">
+        <div class="dropDown-shadow invisible hidden flex flex-col md:absolute md:left-0 md:top-65px md:w-210px md:bg-base md:p-2 group-hover:md:visible group-hover:md:flex" :class="{ '<md:visible! <md:flex!': isDropdownOpen }" aria-label="submenu">
+          <nuxt-link to="/about" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>
           <nuxt-link to="" class="nav-dropdown" target="_blank">
@@ -55,10 +53,10 @@ const isDropdownOpen = ref(false)
 
       <a href="https://codepen.io/momoathome/pen/JjMOxEP" class="nav-item" target="_blank">Codepen</a>
 
-      <div class="flex flex-col pt-3 gap-3 md:flex-row md:p-0 md:gap-0">
+      <div class="flex flex-col gap-3 pt-3 md:flex-row md:gap-0 md:p-0">
         <!-- Language toggle -->
-        <div class="flex bg-#f9f9f9 rounded-2 transition transition-duration-200 language justify-between items-center md:bg-transparent <md:py-3 <md:px-3 dark:bg-#242424 dark:md:bg-transparent">
-          <p for="languageListBox" class="font-medium m-0 text-sm text-dark-900/60 md:hidden dark:text-dark_nav_accent">
+        <div class="language flex items-center justify-between transition transition-duration-200 <md:px-3 <md:py-3">
+          <p for="languageListBox" class="m-0 text-sm font-medium text-dark-900/60 md:hidden dark:text-dark_nav_accent">
             Translation
           </p>
           <div class="flex">
@@ -71,7 +69,7 @@ const isDropdownOpen = ref(false)
               role="listbox"
               tabindex="0"
               aria-labelledby="languageListBox"
-              class="bg-transparent border-none rounded-lg list p-0.3rem md:p-2 md:text-18px"
+              class="list rounded-lg border-none bg-base p-0.3rem md:p-2 md:text-18px"
             >
               <option
                 v-for="locale of availableLocales"
@@ -86,11 +84,11 @@ const isDropdownOpen = ref(false)
         </div>
 
         <!-- Darkmode toggle -->
-        <div class="flex bg-#f9f9f9 rounded-2 py-3 px-3 transition transition-duration-200 justify-between items-center md:bg-transparent dark:bg-#242424 dark:md:bg-transparent">
-          <p for="languageListBox" class="font-medium m-0 text-sm text-dark-900/60 md:hidden dark:text-dark_nav_accent">
+        <div class="flex items-center justify-between rounded-2 bg-#f9f9f9 px-3 py-3 transition transition-duration-200 dark:bg-#242424 md:bg-transparent dark:md:bg-transparent">
+          <p for="languageListBox" class="m-0 text-sm font-medium text-dark-900/60 md:hidden dark:text-dark_nav_accent">
             Appearence
           </p>
-          <button id="darkModeToggle" type="button" class="flex text-7 icon-btn items-center" @click="toggle()">
+          <button id="darkModeToggle" type="button" class="flex items-center text-7 icon-btn" @click="toggleDark">
             <div i="tabler-sun dark:tabler-moon" />
           </button>
         </div>
@@ -128,11 +126,7 @@ const isDropdownOpen = ref(false)
     margin-left: 2px;
   }
 
-  .dark .language::before {
-    background-color: var(--dark-nav-accent);
-  }
-
-  .dark .language::after {
+  .dark .language::after, .dark .language::before {
     background-color: var(--dark-nav-accent);
   }
 
@@ -158,7 +152,7 @@ const isDropdownOpen = ref(false)
   }
 
   .hamb-line {
-    background: var(--base);
+    background: var(--base-dark);
     position: absolute;
     left: 0;
     padding: 0;
@@ -166,10 +160,6 @@ const isDropdownOpen = ref(false)
     height: 4px;
     border-radius: 4px;
     transition: all 0.4s;
-  }
-
-  .dark .hamb-line {
-    background: var(--base-light);
   }
 
   .hamb-line-top {
