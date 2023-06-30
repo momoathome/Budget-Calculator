@@ -44,7 +44,7 @@ Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
     pnpm dev
     ```
 
-    You may also want to check if there are any updates to the dependencies. Do so by running taze, but note that breakages may occur.
+    You may also want to check if there are any updates to the dependencies. Do so by running taze.
 
     ```bash
     pnpm taze
@@ -65,6 +65,7 @@ The Starter Template uses the following technologies:
 * [ESLint](https://eslint.org/)
 * [UnoCSS](https://uno.antfu.me)
 * [Iconify](https://iconify.design/)
+* [Animate](https://animate.style/)
 * [Pinia](https://pinia.vuejs.org)
 * [Vue Use](https://vueuse.org/)
 * [Vue i18n](https://vue-i18n.intlify.dev/)
@@ -78,9 +79,11 @@ For more information on each of these, please refer to their respective document
 
 The Starter Template uses Nuxt 3 in SSR Mode by default, but you can use full static mode by uncommenting the marked line in the [nuxt.config.ts](nuxt.config.ts) file.
 
-Moreover, a default UnoCSS configuration is provided in the [unocss.config.ts](unocss.config.ts) file.
+A default UnoCSS configuration is also provided in the [unocss.config.ts](unocss.config.ts) file.
 
 Along with it is provided a dependency to use UnoCSS as an icon provider. The icons are served by Iconify. The default icon set is [Tabler Icons](https://tablericons.com/), but you can change it to whatever you want. For that, remove the `@iconify-json/tabler` dependency and install the one you want. The naming scheme is generally the same, that is to say `@iconify-json/<icon-set-name>`. If you want a preview of all the icons available, check out [icones.js.org](https://icones.js.org/).
+
+Also with it is provided a dependency to UnoCSS as the provider for animate classes.
 
 The default configuration for ESLint is based on Antfu's configuration (see [@antfu/eslint-config](https://www.npmjs.com/package/@antfu/eslint-config))
 

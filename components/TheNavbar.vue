@@ -8,7 +8,7 @@ const isDropdownOpen = ref(false)
   <header class="box-shadow h-70px flex justify-between bg-base bg-base px-4 md:items-center lg:px-12">
     <div class="flex flex-1">
       <!-- Logo -->
-      <nuxt-link to="/" class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline">
+      <nuxt-link to="/" class="animated animated-bounce animated-infinite h-full flex items-center text-3xl font-bold text-sky-400 no-underline">
         Snowowl
       </nuxt-link>
     </div>

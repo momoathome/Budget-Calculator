@@ -33,7 +33,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vue-macros/nuxt',
     '@unocss/nuxt',
-    '@nuxtjs/critters',
     '@nuxtjs/color-mode',
     '@nuxt/image-edge',
     '@pinia/nuxt',
@@ -58,13 +57,13 @@ export default defineNuxtConfig({
     /*     exportProps: true,
     reactivityTransform: true, */
   },
-  colorMode: {
+  /*   colorMode: {
     preference: 'system',
     fallback: 'light',
     classPrefix: '',
     classSuffix: '',
     storageKey: 'color-scheme',
-  },
+  }, */
   pinia: {
     autoImports: [
       'defineStore',

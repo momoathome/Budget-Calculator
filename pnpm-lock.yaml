@@ -65,6 +65,9 @@ devDependencies:
   taze:
     specifier: ^0.11.2
     version: 0.11.2
+  unocss-preset-extra:
+    specifier: ^0.5.2
+    version: 0.5.2(unocss@0.53.4)
   vue-i18n:
     specifier: ^9.2.2
     version: 9.2.2(vue@3.3.4)
@@ -8672,6 +8675,14 @@ packages:
   /universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+    dev: true
+
+  /unocss-preset-extra@0.5.2(unocss@0.53.4):
+    resolution: {integrity: sha512-DQB2BcuE5jq3XiQahN2NeIeJIQOqgnfHoDIsJ6dPMkxgsuv8vT+xgzcJP42bgTBW+2Aym/fwDcqJOHqIAVqw9g==}
+    peerDependencies:
+      unocss: '>= 0.31.0 < 1'
+    dependencies:
+      unocss: 0.53.4(@unocss/webpack@0.53.4)(postcss@8.4.24)(vite@4.3.9)
     dev: true
 
   /unocss@0.53.4(@unocss/webpack@0.53.4)(postcss@8.4.24)(vite@4.3.9):

@@ -9,6 +9,7 @@ import {
   transformerVariantGroup,
   // presetMini,
 } from 'unocss'
+import { presetExtra } from 'unocss-preset-extra'
 
 /* @unocss-include */
 
@@ -27,6 +28,7 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetAttributify(),
+    presetExtra(),
     presetIcons({
       scale: 1,
       warn: true,
