@@ -1,3 +1,5 @@
+<script lang="ts" setup>
+/* Darkmode toggle Function with Nuxtjs/color-mode */
 /* export default function useDark() {
   const colorMode = useColorMode()
 
@@ -17,9 +19,10 @@
 
   return { toggle, value, isDark, preference }
 } */
-export const isDark = useDark()
 
-export function toggleDark(event: MouseEvent) {
+/* new animated Darkmode toggle Function from antfu */
+const isDark = useDark()
+function toggleDark(event: MouseEvent) {
   // @ts-expect-error experimental API
   const isAppearanceTransition = document.startViewTransition
     && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -62,3 +65,15 @@ export function toggleDark(event: MouseEvent) {
       )
     })
 }
+</script>
+
+<template>
+  <div class="flex items-center justify-between rounded-2 bg-#f9f9f9 px-3 py-3 transition transition-duration-200 dark:bg-#242424 md:bg-transparent dark:md:bg-transparent">
+    <p for="languageListBox" class="m-0 text-sm font-medium text-dark-900/60 md:hidden dark:text-dark_nav_accent">
+      Appearence
+    </p>
+    <button id="darkModeToggle" type="button" class="flex items-center text-7 icon-btn" @click="toggleDark">
+      <div i="tabler-sun dark:tabler-moon" />
+    </button>
+  </div>
+</template>
