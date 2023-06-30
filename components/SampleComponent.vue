@@ -5,8 +5,8 @@ const { increment, decrement, reset, double } = store
 </script>
 
 <template>
-  <div class="bg-secondary rounded-xl shadow-md dark:bg-secondary_dark">
-    <div class="flex flex-col text-center p-12 text-[rgb(181,205,245)] gap-16 items-center">
+  <div class="rounded-xl bg-secondary shadow-md dark:bg-secondary_dark">
+    <div class="flex flex-col items-center gap-16 p-12 text-center text-[rgb(181,205,245)]">
       <h2 class="m-0 text-3xl">
         Counter: {{ numberFormat(count) }}
       </h2>
