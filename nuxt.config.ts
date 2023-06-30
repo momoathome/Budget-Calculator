@@ -19,7 +19,10 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
-  imports: { dirs: ['stores'] }, // add folders here to auto-import them in your application
+
+  // add folders here to auto-import them in your application
+  imports: { dirs: ['stores'] },
+
   components: [{ path: '~/components', pathPrefix: false }],
 
   // uncomment to disable SSR. This will basically make the app a SPA, like a normal Vue app, but with all the Nuxt goodies
@@ -35,13 +38,16 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/image-edge',
+    '@nuxt/devtools',
     '@pinia/nuxt',
   ],
+
   vue: {
     compilerOptions: {
       nodeTransforms: [transformShortVmodel({ prefix: '::' })],
     },
   },
+
   vite: {
     plugins: [
       VueI18nVitePlugin({
@@ -53,10 +59,12 @@ export default defineNuxtConfig({
       }),
     ],
   },
+
   macros: {
     /*     exportProps: true,
     reactivityTransform: true, */
   },
+
   /*   colorMode: {
     preference: 'system',
     fallback: 'light',
@@ -70,5 +78,9 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'],
       'storeToRefs',
     ],
+  },
+
+  devtools: {
+    enabled: true,
   },
 })

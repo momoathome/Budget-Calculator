@@ -8,7 +8,7 @@ const isDropdownOpen = ref(false)
   <header class="box-shadow h-70px flex justify-between bg-base bg-base px-4 md:items-center lg:px-12">
     <div class="flex flex-1">
       <!-- Logo -->
-      <nuxt-link to="/" class="animated animated-bounce animated-infinite h-full flex items-center text-3xl font-bold text-sky-400 no-underline">
+      <nuxt-link to="/" class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline animated animated-pulse animated-infinite animated-slower">
         Snowowl
       </nuxt-link>
     </div>
@@ -26,14 +26,14 @@ const isDropdownOpen = ref(false)
       <nuxt-link to="/" class="nav-item">
         Home
       </nuxt-link>
-      <nuxt-link to="" class="nav-item">
+      <nuxt-link to="/about" class="nav-item">
         {{ t("global.about") }}
       </nuxt-link>
-      <a href="#" class="nav-item" target="_blank">Stackoverflow</a>
-      <a href="#" class="nav-item" target="_blank">LinkedIn</a>
+      <a href="#" class="nav-item" target="_blank">Link3</a>
+      <a href="#" class="nav-item" target="_blank">Link4</a>
 
       <!-- Dropdown -->
-      <div class="group relative block h-52px flex-col cursor-pointer md:h-full md:flex hover:md:h-auto nav-item hover:<md:pb-0" :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
+      <div class="group relative block h-52px flex-col cursor-pointer md:h-full nav-item md:flex hover:md:h-auto hover:<md:pb-0" :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
         <div class="flex items-center md:h-full" :class="{ '<md:pb-2.5': isDropdownOpen }">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
@@ -51,7 +51,7 @@ const isDropdownOpen = ref(false)
         </div>
       </div>
 
-      <a href="https://codepen.io/momoathome/pen/JjMOxEP" class="nav-item" target="_blank">Codepen</a>
+      <a href="" class="nav-item" target="_blank">Link6</a>
 
       <div class="flex flex-col gap-3 pt-3 md:flex-row md:gap-0 md:p-0">
         <!-- Language toggle -->
