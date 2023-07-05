@@ -8,12 +8,15 @@ const isDropdownOpen = ref(false)
   <header class="box-shadow h-70px flex justify-between bg-base bg-base px-4 md:items-center lg:px-12">
     <div class="flex flex-1">
       <!-- Logo -->
-      <nuxt-link to="/" class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline animated animated-pulse animated-infinite animated-slower">
+      <nuxt-link to="/"
+        class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline animated animated-pulse animated-infinite animated-slower">
         Snowowl
       </nuxt-link>
     </div>
 
-    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }" class="hamburger-toggle h-full border-none bg-transparent md:hidden" :aria-expanded="isMobileMenuActive" @click="isMobileMenuActive = !isMobileMenuActive">
+    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }"
+      class="hamburger-toggle h-full border-none bg-transparent md:hidden" :aria-expanded="isMobileMenuActive"
+      @click="isMobileMenuActive = !isMobileMenuActive">
       <span class="hamburger-container" aria-hidden="true">
         <span class="hamb-line hamb-line-top" aria-hidden="true" />
         <span class="hamb-line hamb-line-middle" aria-hidden="true" />
@@ -22,7 +25,8 @@ const isDropdownOpen = ref(false)
     </button>
 
     <!-- Navigation -->
-    <nav class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:static md:z-0 md:h-full md:w-auto md:flex-row <md:bg-base md:px-0 md:opacity-100 md:transition-none">
+    <nav
+      class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:static md:z-0 md:h-full md:w-auto md:flex-row <md:bg-base md:px-0 md:opacity-100 md:transition-none">
       <nuxt-link to="/" class="nav-item">
         Home
       </nuxt-link>
@@ -33,12 +37,16 @@ const isDropdownOpen = ref(false)
       <a href="#" class="nav-item" target="_blank">Link4</a>
 
       <!-- Dropdown -->
-      <div class="group relative block h-52px flex-col cursor-pointer md:h-full nav-item md:flex hover:md:h-auto hover:<md:pb-0" :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
+      <div
+        class="group relative block h-52px flex-col cursor-pointer md:h-full nav-item md:flex hover:md:h-auto hover:<md:pb-0"
+        :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
         <div class="flex items-center md:h-full" :class="{ '<md:pb-2.5': isDropdownOpen }">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
-        <div class="dropDown-shadow invisible flex flex-col opacity-0 transition md:absolute md:left-0 md:top-65px md:w-210px md:bg-base md:p-2 group-hover:md:visible group-hover:md:opacity-100" :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu">
+        <div
+          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:absolute md:left-0 md:top-65px md:w-210px md:bg-base md:p-2 group-hover:md:visible group-hover:md:opacity-100"
+          :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu">
           <nuxt-link to="/about" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>
@@ -67,6 +75,7 @@ const isDropdownOpen = ref(false)
 .router-link-exact-active {
   color: var(--primary) !important;
 }
+
 .box-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -75,36 +84,14 @@ const isDropdownOpen = ref(false)
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-@media (min-width: 768px) {
-
-  .language::before {
-    width: 1px;
-    height: 24px;
-    background-color: rgba(18, 18, 18, .3);
-    content: "";
-    margin-right: 8px;
-    margin-left: 4px;
-  }
-  .language::after {
-    width: 1px;
-    height: 24px;
-    background-color: rgba(18, 18, 18, .3);
-    content: "";
-    margin-left: 2px;
-  }
-
-  .dark .language::after, .dark .language::before {
-    background-color: var(--dark-nav-accent);
-  }
-
-}
 /* Responsive */
 @media (max-width: 768px) {
 
   .dropDown-shadow {
     box-shadow: none
   }
-  .hamburger-toggle.is-active ~ .main-nav {
+
+  .hamburger-toggle.is-active~.main-nav {
     height: calc(100dvh - 70px);
     opacity: 1;
     overflow-y: hidden;
@@ -133,10 +120,12 @@ const isDropdownOpen = ref(false)
     top: 0;
     width: 22px;
   }
+
   .hamb-line-middle {
     top: 8px;
     width: 16px;
   }
+
   .hamb-line-bottom {
     bottom: 0;
   }
@@ -146,10 +135,12 @@ const isDropdownOpen = ref(false)
     transform-origin: 5%;
     width: 25.5px;
   }
+
   .hamburger-toggle.is-active .hamb-line-middle {
     transform: translateX(-24px);
     background-color: transparent;
   }
+
   .hamburger-toggle.is-active .hamb-line-bottom {
     transform-origin: 5%;
     transform: rotate(-45deg);
