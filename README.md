@@ -1,4 +1,4 @@
-# Nuxt 3 Snowowl Starter Template
+# Budget-Calculator by momoathome
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
@@ -26,12 +26,12 @@ Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
     npm install -g pnpm
     ```
 
-2. **Create a new project.**
+2. **Create your own project.**
 
-    Use the Starter Template to create a new project:
+    Use this as a Template to create your own project:
 
     ```bash
-    npx degit "momoathome/NuxtTemplate" nuxt-app
+    git clone "https://github.com/momoathome/Budget-Calculator.git"
     ```
 
 3. **Start developing.**
@@ -39,7 +39,7 @@ Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
     Install the dependencies and run the development server:
 
     ```bash
-    cd nuxt-app
+    cd budget-calculator
     pnpm install
     pnpm dev
     ```
@@ -50,13 +50,13 @@ Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
     pnpm taze
     ```
 
-4. **Enjoy your new Nuxt 3 project!**
+4. **Enjoy your new Budget-Calculator project!**
 
     Your site is now running at `http://localhost:3000`!
 
 ## ✨ Features
 
-The Starter Template uses the following technologies:
+The Budget-Calculator uses the following technologies:
 
 * [Nuxt 3](https://v3.nuxtjs.org/)
 * [Vue 3](https://v3.vuejs.org/)
