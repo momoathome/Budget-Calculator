@@ -10,7 +10,7 @@ const isDropdownOpen = ref(false)
       <!-- Logo -->
       <nuxt-link to="/"
         class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline animated animated-pulse animated-infinite animated-slower">
-        Snowowl
+        {{ t("global.title") }}
       </nuxt-link>
     </div>
 
@@ -28,13 +28,11 @@ const isDropdownOpen = ref(false)
     <nav
       class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:static md:z-0 md:h-full md:w-auto md:flex-row <md:bg-base md:px-0 md:opacity-100 md:transition-none">
       <nuxt-link to="/" class="nav-item">
-        Home
+        {{ t("global.overview") }}
       </nuxt-link>
       <nuxt-link to="/about" class="nav-item">
         {{ t("global.about") }}
       </nuxt-link>
-      <a href="#" class="nav-item" target="_blank">Link3</a>
-      <a href="#" class="nav-item" target="_blank">Link4</a>
 
       <!-- Dropdown -->
       <div
@@ -58,8 +56,6 @@ const isDropdownOpen = ref(false)
           </nuxt-link>
         </div>
       </div>
-
-      <a href="" class="nav-item" target="_blank">Link6</a>
 
       <div class="flex flex-col gap-3 pt-3 md:flex-row md:gap-0 md:p-0">
         <!-- Language toggle -->

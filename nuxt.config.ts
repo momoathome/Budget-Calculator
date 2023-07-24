@@ -15,7 +15,7 @@ function resolveLocalePath(extension: string): string {
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Snowowl Starter Template',
+      title: 'Budget Calculator',
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },

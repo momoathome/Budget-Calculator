@@ -1,12 +1,14 @@
 global:
-  about: Über
+  title: Budget Calculator
+  overview: Übersicht
+  about: Information
 main:
-  title: Willkommen,
+  Income: Einnahmen
+  Expenses: Ausgaben
 about:
-  title: Über Snowowl starter Template
+  title: Über Budget Calculator
   summary: >-
-    Snowowl starter Template ist ein einfaches, schnelles, und einsatzbereites starter template für Nuxt 3.
-    Es enthält die notwendigen Werkzeuge, damit Sie sofort mit Ihrem nächsten Projekt beginnen können.
+    der Budget Calculator ist ein einfacher, schneller, und Überichtlicher Rechner für Ihre Einnahmen und Ausgaben.
   config: >-
     Darüber hinaus enthält es kleine Hilfsprogramme, die bei der Lokalisierung helfen,
     Farbschemata und sogar eine Konfiguration für ESLint und VSCode.
