@@ -48,6 +48,14 @@ a {
   text-decoration: inherit;
 }
 
+:disabled {
+  cursor: default;
+}
+
+[hidden] {
+  display: none;
+}
+
 :where(nav) :where(ol, ul) {
   list-style-type: none;
   padding: 0;
@@ -163,6 +171,7 @@ a:not([class]) {
 
 :where(button, input:is([type=button i], [type=reset i], [type=submit i])) {
   -webkit-appearance: button;
+  cursor: pointer;
   background-color: transparent;
   background-image: none;
 }
@@ -176,6 +185,10 @@ a:not([class]) {
   text-transform: none;
   border-radius: 0;
   padding-right: 1em
+}
+
+:where(select, [role="listbox"]) {
+  cursor: pointer;
 }
 
 :where(textarea) {
