@@ -3,6 +3,7 @@ global:
   overview: Overview
   about: About
 main:
+  Budget: Your Budget
   Income: Income
   Expenses: Expenses
 about:

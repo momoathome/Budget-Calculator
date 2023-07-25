@@ -3,6 +3,7 @@ global:
   overview: Übersicht
   about: Information
 main:
+  Budget: Dein Budget
   Income: Einnahmen
   Expenses: Ausgaben
 about:

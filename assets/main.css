@@ -3,7 +3,7 @@
   --base-dark: rgb(26, 26, 26);
   --primary: rgb(14, 165, 233);
   --primary-dark: rgb(10, 122, 174);
-  --primary-light: rgb(77, 191, 245);
+  --primary-light: rgba(77, 192, 245, 0.79);
   --secondary: rgb(41, 45, 62);
   --secondary-dark: rgb(36, 36, 36);
   --dark-nav-accent: rgba(235, 235, 235, .6);
