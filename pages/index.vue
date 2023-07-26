@@ -35,9 +35,9 @@ const expenses = {
   ],
 }
 
-const totalBudget = ref(0)
-const totalIncome = ref(0)
-const totalExpense = ref(0)
+const totalIncome = computed(() => getTotalAmounts(income))
+const totalExpenses = computed(() => getTotalAmounts(expenses))
+const totalBudget = computed(() => totalIncome.value - totalExpenses.value)
 
 function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
   const amounts: number[] = []
@@ -45,21 +45,6 @@ function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
   Object.values(object).forEach(array => array.map((val: { amount: number }) => amounts.push(val.amount)))
   return amounts.reduce((sum, amount) => (sum += amount), 0)
 }
-
-function getTotalIncome() {
-  totalIncome.value = getTotalAmounts(income)
-}
-function getTotalExpenses() {
-  totalExpense.value = getTotalAmounts(expenses)
-}
-function getTotalBudget() {
-  totalBudget.value = totalIncome.value - totalExpense.value
-}
-onMounted(() => {
-  getTotalIncome()
-  getTotalExpenses()
-  getTotalBudget()
-})
 </script>
 
 <template>
@@ -90,7 +75,7 @@ onMounted(() => {
           <div>
             <h3 class="w-322px flex justify-between pe-4 text-2xl">
               {{ t("main.Expenses") }}
-              <span class="font-extrabold">{{ numberFormat(totalExpense) }}</span>
+              <span class="font-extrabold">{{ numberFormat(totalExpenses) }}</span>
             </h3>
             <div class="grid auto-cols-fr gap-12 md:grid-cols-2">
               <cash-list v-for="(item, index) in expenses" :key="index" :data="item" :index="index" />
