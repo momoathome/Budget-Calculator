@@ -40,12 +40,14 @@ export default defineNuxtConfig({
     '@nuxt/image-edge',
     '@nuxt/devtools',
     '@pinia/nuxt',
+    'nuxt-typed-router',
   ],
 
   vue: {
     compilerOptions: {
       nodeTransforms: [transformShortVmodel({ prefix: '::' })],
     },
+    defineModel: true,
   },
 
   vite: {
