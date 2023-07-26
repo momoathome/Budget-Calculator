@@ -45,7 +45,7 @@ const isDropdownOpen = ref(false)
         <div
           class="dropDown-shadow invisible flex flex-col opacity-0 transition md:absolute md:left-0 md:top-65px md:w-210px md:bg-base md:p-2 group-hover:md:visible group-hover:md:opacity-100"
           :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu">
-          <nuxt-link to="/about" class="nav-dropdown" target="_blank">
+          <nuxt-link to="" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>
           <nuxt-link to="" class="nav-dropdown" target="_blank">
