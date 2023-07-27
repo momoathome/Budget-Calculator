@@ -15,7 +15,7 @@ const inputValue = ref('')
 
 <template>
   <div>
-    <h4 class="m-0 text-xl font-600 text-primary">
+    <h4 class="m-0 text-(xl primary) font-600">
       {{ index }}
     </h4>
     <ul class="my-2 flex flex-col gap-4 ps-0">

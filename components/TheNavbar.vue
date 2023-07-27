@@ -26,7 +26,7 @@ const isDropdownOpen = ref(false)
 
     <!-- Navigation -->
     <nav
-      class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:static md:z-0 md:h-full md:w-auto md:flex-row <md:bg-base md:px-0 md:opacity-100 md:transition-none">
+      class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base">
       <nuxt-link to="/" class="nav-item">
         {{ t("global.overview") }}
       </nuxt-link>
@@ -36,14 +36,14 @@ const isDropdownOpen = ref(false)
 
       <!-- Dropdown -->
       <div
-        class="group relative block h-52px flex-col cursor-pointer md:h-full nav-item md:flex hover:md:h-auto hover:<md:pb-0"
+        class="group relative block h-52px flex-col cursor-pointer md:(h-full flex) nav-item hover:md:h-auto hover:<md:pb-0"
         :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
         <div class="flex items-center md:h-full" :class="{ '<md:pb-2.5': isDropdownOpen }">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
         <div
-          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:absolute md:left-0 md:top-65px md:w-210px md:bg-base md:p-2 group-hover:md:visible group-hover:md:opacity-100"
+          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:(absolute left-0 top-65px w-210px bg-base p-2) group-hover:(md:visible md:opacity-100)"
           :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu">
           <nuxt-link to="" class="nav-dropdown" target="_blank">
             Dropdown
@@ -57,7 +57,7 @@ const isDropdownOpen = ref(false)
         </div>
       </div>
 
-      <div class="flex flex-col gap-3 pt-3 md:flex-row md:gap-0 md:p-0">
+      <div class="flex flex-col gap-3 pt-3 md:(flex-row gap-0 p-0)">
         <!-- Language toggle -->
         <locale-toggle />
         <!-- Darkmode toggle -->
