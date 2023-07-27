@@ -52,7 +52,7 @@ function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
     <the-navbar />
 
     <div class="flex-center flex-col gap-12">
-      <main class="mt-16 flex flex-1 flex-col gap-8 lg:gap-20">
+      <main flex="~ 1 col" gap="8 lg:20" m="t-16">
         <div class="flex flex-col items-center">
           <div class="w-max">
             <h1 class="m-0 text-2xl">
