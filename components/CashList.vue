@@ -20,6 +20,7 @@ function doSomething() {
     return
 
   emit('submit', inputValue.value, inputAmount.value, props.index)
+  inputValue.value = ''
 }
 </script>
 
