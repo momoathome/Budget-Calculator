@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 const { locale: currentLocale, t } = useI18n()
 
-const income = {
+const income = reactive({
   Paycheck: [
     { id: 1, text: 'Paycheck', amount: 2_218 },
   ],
-}
-const expenses = {
+})
+const expenses = reactive({
   Utilities: [
     { id: 1, text: 'Handy', amount: 20 },
     { id: 2, text: 'Internet', amount: 16 },
@@ -33,7 +33,7 @@ const expenses = {
   Savings: [
     { id: 1, text: 'Fester Wert', amount: 52.50 },
   ],
-}
+})
 
 const totalIncome = computed(() => getTotalAmounts(income))
 const totalExpenses = computed(() => getTotalAmounts(expenses))
@@ -44,6 +44,22 @@ function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
 
   Object.values(object).forEach(array => array.map((val: { amount: number }) => amounts.push(val.amount)))
   return amounts.reduce((sum, amount) => (sum += amount), 0)
+}
+
+function onSubmit(inputValue: string, inputAmount: number, index: string) {
+  const newObject = {
+    id: getRandomNumber(0, 1_000_000),
+    text: inputValue,
+    amount: inputAmount,
+  }
+
+  addObject(newObject, index)
+}
+
+function addObject(object: any, index: any) {
+  if (index === 'Income')
+    income.Paycheck.push(object)
+  else expenses[index].push(object)
 }
 </script>
 
@@ -70,7 +86,7 @@ function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
               {{ t("main.Income") }}
               <span class="font-extrabold">{{ numberFormat(totalIncome) }}</span>
             </h3>
-            <cash-list :data="income.Paycheck" index="Income" />
+            <cash-list :data="income.Paycheck" index="Income" @submit="onSubmit" />
           </div>
           <div>
             <h3 class="w-322px flex justify-between pe-4 text-2xl">
@@ -78,7 +94,7 @@ function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
               <span class="font-extrabold">{{ numberFormat(totalExpenses) }}</span>
             </h3>
             <div class="grid auto-cols-fr gap-12 md:grid-cols-2">
-              <cash-list v-for="(item, index) in expenses" :key="index" :data="item" :index="index" />
+              <cash-list v-for="(item, index) in expenses" :key="index" :data="item" :index="index" @submit="onSubmit" />
             </div>
           </div>
         </div>

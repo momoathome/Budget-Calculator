@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-defineProps<{
+const props = defineProps<{
   description: string
 }>()
+
+const emit = defineEmits(['submit'])
 
 // Vue Macros
 /* const { modelValue } = defineModels<{
@@ -14,13 +16,20 @@ function onInput(e) {
 
 // Vue 3.3 Experimental
 const modelValue = defineModel()
+
+// Todo: add modelValue for the Amount
+
+function onSubmit(e: any) {
+  emit('submit', props.description)
+}
 </script>
 
 <template>
-  <form action="" @submit.prevent>
+  <form action="" @submit.prevent="onSubmit">
     <li class="relative flex list-none items-center gap-2 bg-base text-(xl primary) font-600 shadow-md">
       <input v-model="modelValue" type="text" :placeholder="`new ${description}`"
         class="w-full border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid placeholder-text-primary_light) placeholder:(font-600 text-primary)">
+      <!-- Todo: add second Input for the Amount -->
       <button type="submit" class="absolute right-4 top-3.5 text-2xl" prevent="default" i-tabler-circle-plus />
     </li>
   </form>
