@@ -8,6 +8,7 @@
   --secondary-dark: rgb(36, 36, 36);
   --dark-nav-accent: rgba(235, 235, 235, .6);
   --dark-nav-accent-divider: rgba(235, 235, 235, .2);
+  --divider: rgba(18, 18, 18, .3);
 }
 
 html {

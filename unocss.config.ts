@@ -65,6 +65,7 @@ export default defineConfig({
       secondary_dark: 'var(--secondary-dark)',
       dark_nav_accent: 'var(--dark-nav-accent)',
       dark_nav_accent_divider: 'var(--dark-nav-accent-divider)',
+      divider: 'var(--divider)',
     },
   },
 })
