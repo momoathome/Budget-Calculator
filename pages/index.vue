@@ -56,7 +56,7 @@ function onSubmit(inputValue: string, inputAmount: number, index: string) {
   addObject(newObject, index)
 }
 
-function addObject(object: any, index: any) {
+function addObject(object: any, index: string) {
   if (index === 'Income')
     income.Paycheck.push(object)
   else expenses[index].push(object)
@@ -80,9 +80,9 @@ function addObject(object: any, index: any) {
           </div>
         </div>
 
-        <div class="flex flex-col justify-center gap-20 px-6 lg:flex-row">
+        <div class="flex flex-col justify-center gap-20 px-6 xl:flex-row">
           <div>
-            <h3 class="flex justify-between gap-8 pe-4 text-2xl">
+            <h3 class="flex gap-8 pe-4 text-2xl">
               {{ t("main.Income") }}
               <span class="font-extrabold">{{ numberFormat(totalIncome) }}</span>
             </h3>

@@ -15,24 +15,27 @@ function onInput(e) {
 } */
 
 // Vue 3.3 Experimental
-const modelValue = defineModel()
-
+const inputValue = defineModel<string | number>('inputValue')
+const inputAmount = defineModel<string | number>('inputAmount')
 // Todo: add modelValue for the Amount
 
-function onSubmit(e: any) {
-  emit('submit', props.description)
-}
+const onSubmit = () => emit('submit', props.description)
 </script>
 
 <template>
-  <form action="" @submit.prevent="onSubmit">
-    <li class="relative flex list-none items-center gap-2 bg-base text-(xl primary) font-600 shadow-md">
-      <input v-model="modelValue" type="text" :placeholder="`new ${description}`"
-        class="w-full border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid placeholder-text-primary_light) placeholder:(font-600 text-primary)">
-      <!-- Todo: add second Input for the Amount -->
+  <li class="list-none items-center bg-base text-(xl primary) font-600 shadow-md hover:(cursor-pointer outline-solid)">
+    <form action="" class="w-max flex" @submit.prevent="onSubmit">
+      <input v-model="inputValue" type="text" :placeholder="`new ${description}`"
+        class="me-1 border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:cursor-pointer focus-visible:(cursor-text outline-solid placeholder-text-primary_light) placeholder:(font-600 text-primary)">
+      <div>
+        <span class="bg-divider mt-6px inline-block h-75% w-1px" />
+      </div>
+      <input v-model="inputAmount" type="text" placeholder="amount"
+        class="ms-1 border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:cursor-pointer focus-visible:(cursor-text outline-solid placeholder-text-primary_light) placeholder:(font-600 text-primary)">
+
       <button type="submit" class="absolute right-4 top-3.5 text-2xl" prevent="default" i-tabler-circle-plus />
-    </li>
-  </form>
+    </form>
+  </li>
 </template>
 
 <style scoped>

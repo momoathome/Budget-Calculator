@@ -8,12 +8,25 @@ const props = defineProps<{
 }>()
 
 const formatedAmount = numberFormat(props.item.amount)
+
+function onSubmit() {
+  // TODO:
+}
 </script>
 
 <template>
-  <li class="flex list-none justify-between gap-12 bg-base px-4 py-3 text-xl font-600 shadow-md">
-    {{ item.text }}
-    <span>{{ formatedAmount }}</span>
+  <li class="list-none shadow-md">
+    <form action="" class="w-full flex" @submit.prevent="onSubmit">
+      <input type="text" :value="item.text"
+        class="me-1 border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid)">
+      <div>
+        <span class="bg-divider mt-6px inline-block h-75% w-1px" />
+      </div>
+      <input type="text" :value="formatedAmount"
+        class="ms-1 border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid)">
+
+      <!-- <button type="submit" class="absolute right-4 top-3.5 text-2xl" prevent="default" i-tabler-circle-plus /> -->
+    </form>
   </li>
 </template>
 
