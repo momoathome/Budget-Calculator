@@ -1,12 +1,19 @@
 <script lang="ts" setup>
 const { locale: currentLocale, t } = useI18n()
 
-const income = reactive({
+interface Income {
+  [index: string]: Array<{ id: number; text: string; amount: number }>
+}
+interface Expense {
+  [index: string]: Array<{ id: number; text: string; amount: number }>
+}
+
+const income: Income = reactive({
   Paycheck: [
     { id: 1, text: 'Paycheck', amount: 2_218 },
   ],
 })
-const expenses = reactive({
+const expenses: Expense = reactive({
   Utilities: [
     { id: 1, text: 'Handy', amount: 20 },
     { id: 2, text: 'Internet', amount: 16 },
@@ -46,6 +53,12 @@ function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
   return amounts.reduce((sum, amount) => (sum += amount), 0)
 }
 
+function addObject(object: { id: number; text: string; amount: number }, index: string): void {
+  if (index === 'Income')
+    income.Paycheck.push(object)
+  else expenses[index].push(object)
+}
+
 function onSubmit(inputValue: string, inputAmount: number, index: string) {
   const newObject = {
     id: getRandomNumber(0, 1_000_000),
@@ -54,12 +67,6 @@ function onSubmit(inputValue: string, inputAmount: number, index: string) {
   }
 
   addObject(newObject, index)
-}
-
-function addObject(object: any, index: string) {
-  if (index === 'Income')
-    income.Paycheck.push(object)
-  else expenses[index].push(object)
 }
 </script>
 
