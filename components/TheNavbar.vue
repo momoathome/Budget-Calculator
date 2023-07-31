@@ -26,7 +26,7 @@ const isDropdownOpen = ref(false)
 
     <!-- Navigation -->
     <nav
-      class="main-nav absolute left-0 top-70px z-1000 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base">
+      class="main-nav absolute left-0 top-70px z--1 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base">
       <nuxt-link to="/" class="nav-item">
         {{ t("global.overview") }}
       </nuxt-link>
@@ -91,6 +91,7 @@ const isDropdownOpen = ref(false)
     height: calc(100dvh - 70px);
     opacity: 1;
     overflow-y: hidden;
+    z-index: 1000;
   }
 
   /* Hamburger Menu */

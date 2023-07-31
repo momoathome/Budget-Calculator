@@ -27,7 +27,7 @@ function submitNewCashItem() {
 
 <template>
   <div>
-    <h4 class="m-0 text-(xl primary) font-600">
+    <h4 class="m-0 text-(xl primary)">
       {{ index }}
     </h4>
     <ul class="my-2 flex flex-col gap-4 ps-0">
