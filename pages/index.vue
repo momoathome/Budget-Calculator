@@ -9,7 +9,7 @@ interface Expense {
 }
 
 const income: Income = reactive({
-  Paycheck: [
+  Income: [
     { id: 1, text: 'Paycheck', amount: 2_218 },
   ],
 })
@@ -47,12 +47,25 @@ const expenses: Expense = reactive({
 const totalIncome = computed(() => getTotalAmounts(income))
 const totalExpenses = computed(() => getTotalAmounts(expenses))
 const totalBudget = computed(() => totalIncome.value - totalExpenses.value)
+const totalIncomeValuePerKey = computed(() => getTotalValueForEachKey(income))
+const totalExpensesValuePerKey = computed(() => getTotalValueForEachKey(expenses))
 
-function getTotalAmounts(object: { [s: string]: any } | ArrayLike<any>) {
-  const amounts: number[] = []
+function getTotalAmounts(object: Expense | Income) {
+  return Object.values(object).flatMap(array => array.map(val => val.amount)).reduce((sum, amount) => sum + amount, 0)
+}
 
-  Object.values(object).forEach(array => array.map((val: { amount: number }) => amounts.push(val.amount)))
-  return amounts.reduce((sum, amount) => (sum += amount), 0)
+function getTotalValueForEachKey(object: Expense | Income) {
+  const totalValuePerKey: { [key: string]: number } = {}
+
+  Object.keys(object).forEach((key) => {
+    const array = object[key]
+    if (array && array.length > 0) {
+      const totalValue = array.reduce((sum, val) => sum + val.amount, 0)
+      totalValuePerKey[key] = totalValue
+    }
+  })
+
+  return totalValuePerKey
 }
 
 function addObject(object: { id: number; text: string; amount: number }, index: string): void {
@@ -89,21 +102,23 @@ function onSubmit(inputValue: string, inputAmount: number, index: string) {
 
     <div class="flex flex-col gap-20 px-6 xl:px-12">
       <div class="flex flex-col items-center">
-        <div>
-          <h3 class="flex gap-8 text-2xl">
+        <div class="flex flex-col">
+          <h3 class="mb-8 flex justify-center gap-8 text-2xl">
             {{ t("main.Income") }}
             <span class="font-extrabold">{{ numberFormat(totalIncome) }}</span>
           </h3>
-          <cash-list :data="income.Paycheck" index="Income" @submit="onSubmit" />
+          <cash-list :data="income.Income" index="Income" :total-value-per-key="totalIncomeValuePerKey.Income"
+            @submit="onSubmit" />
         </div>
       </div>
       <div class="flex flex-col">
-        <h3 class="flex justify-center gap-8 text-2xl">
+        <h3 class="mb-8 flex justify-center gap-8 text-2xl">
           {{ t("main.Expenses") }}
           <span class="font-extrabold">{{ numberFormat(totalExpenses) }}</span>
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-12">
-          <cash-list v-for="(item, index) in expenses" :key="index" :data="item" :index="index" @submit="onSubmit" />
+          <cash-list v-for="(item, index) in expenses" :key="index" :data="item" :index="index"
+            :total-value-per-key="totalExpensesValuePerKey[index]" @submit="onSubmit" />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
   index: string | number
+  totalValuePerKey: number
   data: {
     id: number
     text: string
@@ -10,6 +11,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['submit'])
 
+// newCashItem Placeholder description
 const description = props.index === 'Income' ? 'Income' : 'Expense'
 
 const inputValue = ref<string>()
@@ -27,15 +29,16 @@ function submitNewCashItem() {
 
 <template>
   <div>
-    <h4 class="m-0 text-(xl primary)">
-      {{ index }}
-    </h4>
+    <div class="flex ps-4 text-(xl primary) font-600">
+      <h4 class="m-0 w-full">
+        {{ index }}
+      </h4>
+      <span class="w-70% ps-2 lg:w-50%">{{ numberFormat(totalValuePerKey) }}</span>
+    </div>
     <ul class="my-2 flex flex-col gap-4 ps-0">
       <cash-item v-for="(item) in props.data" :key="item.id" :item="item" />
       <new-cash-item :key="index" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount"
         :description="description" @submit="submitNewCashItem" />
-      {{ inputValue }}
-      {{ inputAmount }}
     </ul>
   </div>
 </template>

@@ -4,8 +4,8 @@ global:
   about: About
 main:
   Budget: Your Budget
-  Income: Income
-  Expenses: Expenses
+  Income: Your Income
+  Expenses: Your Expenses
 about:
   title: About Budget Calculator
   summary: >-
