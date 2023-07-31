@@ -8,15 +8,19 @@ const isDropdownOpen = ref(false)
   <header class="box-shadow h-70px flex justify-between bg-base px-4 md:items-center lg:px-12">
     <div class="flex">
       <!-- Logo -->
-      <nuxt-link to="/"
-        class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline animated animated-pulse animated-infinite animated-slower">
+      <nuxt-link
+        to="/"
+        class="h-full flex items-center text-3xl font-bold text-sky-400 no-underline animated animated-pulse animated-infinite animated-slower"
+      >
         {{ t("global.title") }}
       </nuxt-link>
     </div>
 
-    <button type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }"
+    <button
+      type="button" aria-label="mobile menu toggle" :class="{ 'is-active': isMobileMenuActive }"
       class="hamburger-toggle h-full border-none bg-transparent md:hidden" :aria-expanded="isMobileMenuActive"
-      @click="isMobileMenuActive = !isMobileMenuActive">
+      @click="isMobileMenuActive = !isMobileMenuActive"
+    >
       <span class="hamburger-container" aria-hidden="true">
         <span class="hamb-line hamb-line-top" aria-hidden="true" />
         <span class="hamb-line hamb-line-middle" aria-hidden="true" />
@@ -26,7 +30,8 @@ const isDropdownOpen = ref(false)
 
     <!-- Navigation -->
     <nav
-      class="main-nav absolute left-0 top-70px z--1 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base">
+      class="main-nav absolute left-0 top-70px z--1 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base"
+    >
       <nuxt-link to="/" class="nav-item">
         {{ t("global.overview") }}
       </nuxt-link>
@@ -37,14 +42,16 @@ const isDropdownOpen = ref(false)
       <!-- Dropdown -->
       <div
         class="group relative block h-52px flex-col cursor-pointer md:(h-full flex) nav-item hover:md:h-auto hover:<md:pb-0"
-        :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen">
+        :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen"
+      >
         <div class="flex items-center md:h-full" :class="{ '<md:pb-2.5': isDropdownOpen }">
           <span aria-haspopup="true">DropDown</span>
           <div i="tabler-caret-down" />
         </div>
         <div
           class="dropDown-shadow invisible flex flex-col opacity-0 transition md:(absolute left-0 top-65px w-210px bg-base p-2) group-hover:(md:visible md:opacity-100)"
-          :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu">
+          :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu"
+        >
           <nuxt-link to="" class="nav-dropdown" target="_blank">
             Dropdown
           </nuxt-link>

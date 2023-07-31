@@ -2,10 +2,15 @@
 const { locale: currentLocale, t } = useI18n()
 
 interface Income {
-  [index: string]: Array<{ id: number; text: string; amount: number }>
+  [index: string]: Array<IncomeExpenseKeyArray>
 }
 interface Expense {
-  [index: string]: Array<{ id: number; text: string; amount: number }>
+  [index: string]: Array<IncomeExpenseKeyArray>
+}
+interface IncomeExpenseKeyArray {
+  id: number
+  text: string
+  amount: number
 }
 
 const income: Income = reactive({
@@ -68,7 +73,7 @@ function getTotalValueForEachKey(object: Expense | Income) {
   return totalValuePerKey
 }
 
-function addObject(object: { id: number; text: string; amount: number }, index: string): void {
+function addObject(object: IncomeExpenseKeyArray, index: string): void {
   if (index === 'Income')
     income.Paycheck.push(object)
   else expenses[index].push(object)
@@ -107,8 +112,10 @@ function onSubmit(inputValue: string, inputAmount: number, index: string) {
             {{ t("main.Income") }}
             <span class="font-extrabold">{{ numberFormat(totalIncome) }}</span>
           </h3>
-          <cash-list :data="income.Income" index="Income" :total-value-per-key="totalIncomeValuePerKey.Income"
-            @submit="onSubmit" />
+          <cash-list
+            :data="income.Income" index="Income" :total-value-per-key="totalIncomeValuePerKey.Income"
+            @submit="onSubmit"
+          />
         </div>
       </div>
       <div class="flex flex-col">
@@ -117,8 +124,10 @@ function onSubmit(inputValue: string, inputAmount: number, index: string) {
           <span class="font-extrabold">{{ numberFormat(totalExpenses) }}</span>
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-12">
-          <cash-list v-for="(item, index) in expenses" :key="index" :data="item" :index="index"
-            :total-value-per-key="totalExpensesValuePerKey[index]" @submit="onSubmit" />
+          <cash-list
+            v-for="(item, index) in expenses" :key="index" :data="item" :index="index"
+            :total-value-per-key="totalExpensesValuePerKey[index]" @submit="onSubmit"
+          />
         </div>
       </div>
     </div>

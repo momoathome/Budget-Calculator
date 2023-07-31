@@ -37,8 +37,10 @@ function submitNewCashItem() {
     </div>
     <ul class="my-2 flex flex-col gap-4 ps-0">
       <cash-item v-for="(item) in props.data" :key="item.id" :item="item" />
-      <new-cash-item :key="index" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount"
-        :description="description" @submit="submitNewCashItem" />
+      <new-cash-item
+        :key="index" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount"
+        :description="description" @submit="submitNewCashItem"
+      />
     </ul>
   </div>
 </template>
