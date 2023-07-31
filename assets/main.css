@@ -6,9 +6,8 @@
   --primary-light: rgba(77, 192, 245, 0.79);
   --secondary: rgb(41, 45, 62);
   --secondary-dark: rgb(36, 36, 36);
-  --dark-nav-accent: rgba(235, 235, 235, .6);
-  --dark-nav-accent-divider: rgba(235, 235, 235, .2);
-  --divider: rgba(18, 18, 18, .3);
+  --nav-divider: rgba(18, 18, 18, .3);
+  --list-divider: rgba(18, 18, 18, .15);
 }
 
 html {
@@ -20,6 +19,8 @@ html.dark {
   --base: rgb(26, 26, 26);
   --base-dark: rgb(244, 244, 245);
   --secondary: rgb(36, 36, 36);
+  --nav-divider: rgba(235, 235, 235, .6);
+  --list-divider: rgba(235, 235, 235, .15);
 }
 
 /* hide Input Number Arrows */

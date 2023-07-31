@@ -64,9 +64,8 @@ export default defineConfig({
       primary_light: 'var(--primary-light)',
       secondary: 'var(--secondary)',
       secondary_dark: 'var(--secondary-dark)',
-      dark_nav_accent: 'var(--dark-nav-accent)',
-      dark_nav_accent_divider: 'var(--dark-nav-accent-divider)',
-      divider: 'var(--divider)',
+      nav_divider: 'var(--nav-divider)',
+      list_divider: 'var(--list-divider)',
     },
   },
 })

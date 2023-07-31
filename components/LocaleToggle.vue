@@ -31,7 +31,7 @@ const { locale: currentLocale } = useI18n()
   .language_select::before {
     width: 1px;
     height: 24px;
-    background-color: rgba(18, 18, 18, .3);
+    background-color: var(--nav-divider);
     content: "";
     margin-right: 8px;
     margin-left: 4px;
@@ -40,14 +40,9 @@ const { locale: currentLocale } = useI18n()
   .language_select::after {
     width: 1px;
     height: 24px;
-    background-color: rgba(18, 18, 18, .3);
+    background-color: var(--nav-divider);
     content: "";
     margin-left: 2px;
-  }
-
-  .dark .language_select::after,
-  .dark .language_select::before {
-    background-color: var(--dark-nav-accent);
   }
 
 }
