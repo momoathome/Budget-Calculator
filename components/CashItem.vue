@@ -9,14 +9,16 @@ const props = defineProps<{
 
 const formatedAmount = numberFormat(props.item.amount)
 
-function onSubmit() {
-  // TODO:
+function onChange() {
+  console.log('change')
+
+  // TODO: update expense Object on change
 }
 </script>
 
 <template>
   <li class="list-none shadow-md">
-    <form action="" class="w-full flex" @submit.prevent="onSubmit">
+    <form action="" class="w-full flex" @input="onChange">
       <input type="text" :value="item.text"
         class="me-1 border-none bg-base px-4 py-3 text-(xl base_dark) font-600 outline-3 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid)">
       <div>

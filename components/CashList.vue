@@ -12,16 +12,16 @@ const emit = defineEmits(['submit'])
 
 const description = props.index === 'Income' ? 'Income' : 'Expense'
 
-const inputValue = ref()
-const inputAmount = ref()
+const inputValue = ref<string>()
+const inputAmount = ref<number | string | null>(null)
 
-function doSomething() {
+function submitNewCashItem() {
   if (inputValue.value === '' || inputValue.value === null || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null)
     return
 
   emit('submit', inputValue.value, +inputAmount.value, props.index)
   inputValue.value = ''
-  inputAmount.value = ''
+  inputAmount.value = null
 }
 </script>
 
@@ -33,7 +33,7 @@ function doSomething() {
     <ul class="my-2 flex flex-col gap-4 ps-0">
       <cash-item v-for="(item) in props.data" :key="item.id" :item="item" />
       <new-cash-item :key="index" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount"
-        :description="description" @submit="doSomething" />
+        :description="description" @submit="submitNewCashItem" />
       {{ inputValue }}
       {{ inputAmount }}
     </ul>
