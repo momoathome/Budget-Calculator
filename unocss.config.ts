@@ -22,7 +22,7 @@ export default defineConfig({
     ['cashlist-item', 'list-none shadow-md flex max-w-max relative'],
     ['flex-center', 'flex items-center justify-center'],
     ['grid-center', 'grid place-items-center'],
-    ['nav-item', 'flex font-600 py-3 text-1.125rem <lg:text-1rem <md:border-b-solid border-b-dark-900/15 dark:border-b-dark_nav_accent_divider <md:border-b-1 transition transition-duration-200 md:px-3 md:h-full md:items-center hover:text-primary'],
+    ['nav-item', 'flex font-600 py-3 text-1.125rem <lg:text-1rem <md:border-b-solid border-b-dark-900/15 dark:border-b-nav_divider <md:border-b-1 transition transition-duration-200 md:px-3 md:h-full md:items-center hover:text-primary'],
     ['nav-dropdown', 'font-600 transition transition-duration-200 text-base_dark hover:text-primary px-3 first-of-type:pb-2.5 not-first-of-type:py-2.5 md:px-5 md:py-1.5'],
   ],
   details: true,
