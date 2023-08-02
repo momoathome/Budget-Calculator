@@ -5,7 +5,9 @@ const isDropdownOpen = ref(false)
 </script>
 
 <template>
-  <header class="box-shadow h-70px flex justify-between bg-base px-4 md:items-center lg:px-12">
+  <header
+    class="box-shadow sticky left-0 top-0 z-10 h-70px flex justify-between bg-base px-4 lg:(static px-12) md:items-center"
+  >
     <div class="flex">
       <!-- Logo -->
       <nuxt-link
@@ -30,7 +32,7 @@ const isDropdownOpen = ref(false)
 
     <!-- Navigation -->
     <nav
-      class="main-nav absolute left-0 top-70px z--1 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base"
+      class="main-nav fixed left-0 top-70px z--1 h-0 w-full flex flex-col overflow-hidden px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base"
     >
       <nuxt-link to="/" class="nav-item">
         {{ t("global.overview") }}
@@ -97,7 +99,6 @@ const isDropdownOpen = ref(false)
   .hamburger-toggle.is-active~.main-nav {
     height: calc(100dvh - 70px);
     opacity: 1;
-    overflow-y: hidden;
     z-index: 1000;
   }
 

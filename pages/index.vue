@@ -1,24 +1,26 @@
 <script lang="ts" setup>
 const { locale: currentLocale, t } = useI18n()
 
-interface Income {
-  [index: string]: Array<IncomeExpenseKeyArray>
+type ObjIncomeExpense = {
+  [index: string]: {
+    id: number
+    text: string
+    amount: number
+  }[]
 }
-interface Expense {
-  [index: string]: Array<IncomeExpenseKeyArray>
-}
-interface IncomeExpenseKeyArray {
+
+type ObjIncomeExpenseKeyArray = {
   id: number
   text: string
   amount: number
 }
 
-const income: Income = reactive({
+const income: ObjIncomeExpense = reactive({
   Income: [
     { id: 1, text: 'Paycheck', amount: 2_218 },
   ],
 })
-const expenses: Expense = reactive({
+const expenses: ObjIncomeExpense = reactive({
   Utilities: [
     { id: 1, text: 'Handy', amount: 20 },
     { id: 2, text: 'Internet', amount: 16 },
@@ -55,11 +57,11 @@ const totalBudget = computed(() => totalIncome.value - totalExpenses.value)
 const totalIncomeValuePerKey = computed(() => getTotalValueForEachKey(income))
 const totalExpensesValuePerKey = computed(() => getTotalValueForEachKey(expenses))
 
-function getTotalAmounts(object: Expense | Income) {
+function getTotalAmounts(object: ObjIncomeExpense) {
   return Object.values(object).flatMap(array => array.map(val => val.amount)).reduce((sum, amount) => sum + amount, 0)
 }
 
-function getTotalValueForEachKey(object: Expense | Income) {
+function getTotalValueForEachKey(object: ObjIncomeExpense) {
   const totalValuePerKey: { [key: string]: number } = {}
 
   Object.keys(object).forEach((key) => {
@@ -73,7 +75,7 @@ function getTotalValueForEachKey(object: Expense | Income) {
   return totalValuePerKey
 }
 
-function addObject(object: IncomeExpenseKeyArray, index: string): void {
+function addObject(object: ObjIncomeExpenseKeyArray, index: string): void {
   if (index === 'Income')
     income.Paycheck.push(object)
   else expenses[index].push(object)
