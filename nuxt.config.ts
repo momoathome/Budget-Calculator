@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   components: [{ path: '~/components', pathPrefix: false }],
 
   // uncomment to disable SSR. This will basically make the app a SPA, like a normal Vue app, but with all the Nuxt goodies
-  // ssr: false,
+  ssr: false,
 
   // global CSS files
   css: ['~/assets/normalize.css', '~/assets/main.css'],
@@ -41,6 +41,7 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@pinia/nuxt',
     'nuxt-typed-router',
+    'nuxt-vuefire',
   ],
 
   vue: {
@@ -48,6 +49,20 @@ export default defineNuxtConfig({
       nodeTransforms: [transformShortVmodel({ prefix: '::' })],
     },
     defineModel: true,
+  },
+
+  vuefire: {
+    config: {
+      apiKey: 'AIzaSyDbouwRrqdx6VYk67hktqQ76yHDgxEk-ag',
+      authDomain: 'budget-calculator-22413.firebaseapp.com',
+      databaseURL: 'https://budget-calculator-22413-default-rtdb.europe-west1.firebasedatabase.app',
+      projectId: 'budget-calculator-22413',
+      storageBucket: 'budget-calculator-22413.appspot.com',
+      messagingSenderId: '868878130529',
+      appId: '1:868878130529:web:e2d94cf1f81da24750b920',
+    },
+    // ensures the auth module is enabled
+    auth: false,
   },
 
   vite: {
