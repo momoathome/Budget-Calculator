@@ -43,12 +43,12 @@ const description = props.index === 'Income' ? 'Income' : 'Expense'
 
 <template>
   <div>
-    <div class="flex ps-4 text-(xl primary) font-600">
-      <h4 class="m-0 w-full">
+    <div class="me-2 flex justify-between px-4 text-(xl primary) font-600">
+      <h4 class="m-0">
         {{ locales() }}
         <!-- durch locales ersetzen -->
       </h4>
-      <span class="w-70% ps-2 lg:w-50%">{{ numberFormat(totalValuePerKey) }}</span>
+      <span class="">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
     <ul class="my-2 flex flex-col gap-4 ps-0">
       <cash-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
