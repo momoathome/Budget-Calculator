@@ -3,9 +3,20 @@ global:
   overview: Overview
   about: About
 main:
-  Budget: Your Budget
-  Income: Your Income
-  Expenses: Your Expenses
+  budget: Your Budget
+  income: Your Income
+  expenses: Your Expenses
+list:
+  income: Incomes
+  bills: Bills
+  utilities: Utilities
+  savings: Savings
+  subscriptions: Subscriptions
+  other expenses: Other Expenses
+inputs:
+  income: new Income
+  expense: new Expense
+  amount: Amount
 about:
   title: About Budget Calculator
   summary: >-

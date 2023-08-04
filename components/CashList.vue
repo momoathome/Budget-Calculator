@@ -10,16 +10,12 @@ type ObjData = {
 }
 
 const props = defineProps<{
-  index: string | number
+  index: string
   totalValuePerKey: number
   data: ObjData
 }>()
 
 const emit = defineEmits(['submit', 'delete'])
-
-// newCashItem Placeholder description
-const description = props.index === 'Income' ? 'Income' : 'Expense'
-
 const inputValue = ref<string>()
 const inputAmount = ref<number | string | null>(null)
 
@@ -35,13 +31,22 @@ function submitNewCashItem() {
 function deleteCashItem(dataKey: string) {
   emit('delete', props.index, dataKey)
 }
+
+const { locale: _, t } = useI18n()
+
+function locales() {
+  return t(`list.${props.index.toLowerCase()}`)
+}
+// newCashItem Placeholder description
+const description = props.index === 'Income' ? 'Income' : 'Expense'
 </script>
 
 <template>
   <div>
     <div class="flex ps-4 text-(xl primary) font-600">
       <h4 class="m-0 w-full">
-        {{ index }}
+        {{ locales() }}
+        <!-- durch locales ersetzen -->
       </h4>
       <span class="w-70% ps-2 lg:w-50%">{{ numberFormat(totalValuePerKey) }}</span>
     </div>

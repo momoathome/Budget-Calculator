@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref as dbRef, getDatabase, push, remove } from 'firebase/database'
+import { ref as dbRef, getDatabase, push, remove, set } from 'firebase/database'
 
 // TypeScript-Typ für eine einzelne Ausgabe (z.B. "Miete")
 type ObjIncomeExpenseItem = {
@@ -33,41 +33,59 @@ const usersRef = dbRef(db, 'users')
 
 function setInitialUserData() {
   /*
-    TODO: refactor this to use a single push function and remove the remove function
+    TODO: remove the remove function when reset is not needed anymore
     TODO: set Config in DB and to true or false to determine if initial data should be set
   */
 
   remove(dbRef(db, 'users/user1'))
 
-  push(dbRef(db, 'users/user1/incomes/Income'), {
-    id: 0,
-    text: 'Paycheck',
-    amount: 1_000,
-  })
-  push(dbRef(db, 'users/user1/expenses/Utilities'), {
-    id: 0,
-    text: 'Handy',
-    amount: 20,
-  })
-  push(dbRef(db, 'users/user1/expenses/Bills'), {
-    id: 0,
-    text: 'Miete',
-    amount: 500,
-  })
-  push(dbRef(db, 'users/user1/expenses/Subscriptions'), {
-    id: 0,
-    text: 'Netflix',
-    amount: 13,
-  })
-  push(dbRef(db, 'users/user1/expenses/Other Expenses'), {
-    id: 0,
-    text: 'Lebensmittel',
-    amount: 200,
-  })
-  push(dbRef(db, 'users/user1/expenses/Savings'), {
-    id: 0,
-    text: 'Fester Wert',
-    amount: 50,
+  set(dbRef(db, 'users/user1/'), {
+    incomes: {
+      Income: {
+        0: {
+          id: 0,
+          text: 'Paycheck',
+          amount: 1_000,
+        },
+      },
+    },
+    expenses: {
+      'Utilities': {
+        0: {
+          id: 0,
+          text: 'Handy',
+          amount: 20,
+        },
+      },
+      'Bills': {
+        0: {
+          id: 0,
+          text: 'Miete',
+          amount: 500,
+        },
+      },
+      'Subscriptions': {
+        0: {
+          id: 0,
+          text: 'Netflix',
+          amount: 13,
+        },
+      },
+      'Other Expenses': {
+        0: {
+          id: 0,
+          text: 'Lebensmittel',
+          amount: 200,
+        },
+      },
+      'Savings': {
+        0: {
+          id: 0,
+          text: 'Fester Wert',
+          amount: 50,
+        },
+      },
+    },
   })
 }
 // setInitialUserData()
@@ -75,11 +93,11 @@ function setInitialUserData() {
 const { data: users, pending, promise: usersPromise } = useDatabaseObject<UsersObject>(usersRef)
 await usersPromise.value
 
-const totalIncome = computed(() => getTotalAmount(users.value.user1.incomes))
-const totalExpenses = computed(() => getTotalAmount(users.value.user1.expenses))
+const totalIncome = computed(() => getTotalAmount(users.value!.user1.incomes))
+const totalExpenses = computed(() => getTotalAmount(users.value!.user1.expenses))
 const totalBudget = computed(() => totalIncome.value - totalExpenses.value)
-const totalIncomeValuePerKey = computed(() => getTotalValueForEachKey(users.value.user1.incomes))
-const totalExpensesValuePerKey = computed(() => getTotalValueForEachKey(users.value.user1.expenses))
+const totalIncomeValuePerKey = computed(() => getTotalValuePerKey(users.value!.user1.incomes))
+const totalExpensesValuePerKey = computed(() => getTotalValuePerKey(users.value!.user1.expenses))
 
 function getTotalAmount(object: ObjIncomesExpenses): number {
   if (!object)
@@ -93,7 +111,7 @@ function getTotalAmount(object: ObjIncomesExpenses): number {
   // return Object.values(object).flatMap(array => array.map(val => val.amount)).reduce((sum, amount) => sum + amount, 0)
 }
 
-function getTotalValueForEachKey(object: ObjIncomesExpenses) {
+function getTotalValuePerKey(object: ObjIncomesExpenses) {
   const totalValuePerKey: { [key: string]: number } = {}
 
   Object.entries(object).forEach(([key, value]) => {
@@ -162,7 +180,7 @@ const { locale: _, t } = useI18n()
     <div class="flex flex-col items-center">
       <div class="w-max">
         <h1 class="m-0 text-2xl">
-          {{ t("main.Budget") }}
+          {{ t("main.budget") }}
         </h1>
         <h2 class="m-0 text-6xl font-extrabold">
           {{ numberFormat(totalBudget) }}
@@ -174,24 +192,24 @@ const { locale: _, t } = useI18n()
       <div class="flex flex-col items-center">
         <div class="flex flex-col">
           <h3 class="mb-8 flex justify-center gap-8 text-2xl">
-            {{ t("main.Income") }}
+            {{ t("main.income") }}
             <span class="font-extrabold">{{ numberFormat(totalIncome) }}</span>
           </h3>
           <cash-list
-            v-for="(item, index) in users.user1.incomes" :key="index" :data="item" :index="index"
-            :total-value-per-key="totalIncomeValuePerKey[index]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            v-for="(item, key) in users!.user1.incomes" :key="key" :data="item" :index="key as string"
+            :total-value-per-key="totalIncomeValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>
       <div class="flex flex-col">
         <h3 class="mb-8 flex justify-center gap-8 text-2xl">
-          {{ t("main.Expenses") }}
+          {{ t("main.expenses") }}
           <span class="font-extrabold">{{ numberFormat(totalExpenses) }}</span>
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-center gap-12">
           <cash-list
-            v-for="(item, index) in users.user1.expenses" :key="index" :data="item" :index="index"
-            :total-value-per-key="totalExpensesValuePerKey[index]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            v-for="(item, key) in users!.user1.expenses" :key="key" :data="item" :index="key as string"
+            :total-value-per-key="totalExpensesValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>

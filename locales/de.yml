@@ -3,9 +3,20 @@ global:
   overview: Übersicht
   about: Information
 main:
-  Budget: Dein Budget
-  Income: Deine Einnahmen
-  Expenses: Deine Ausgaben
+  budget: Dein Budget
+  income: Deine Einnahmen
+  expenses: Deine Ausgaben
+list:
+  income: Einnahmen
+  bills: Rechnungen
+  utilities: Notwendigkeiten
+  savings: Ersparnisse
+  subscriptions: Abonnements
+  other expenses: sonstige Ausgaben
+inputs:
+  income: weitere Einnahmen
+  expense: weitere Ausgaben
+  amount: Betrag
 about:
   title: Über Budget Calculator
   summary: >-
