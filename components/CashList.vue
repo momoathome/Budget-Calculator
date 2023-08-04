@@ -1,15 +1,21 @@
 <script lang="ts" setup>
+type ObjIncomeExpenseItem = {
+  amount: number
+  id: number
+  text: string
+}
+
+type ObjData = {
+  [key: string]: ObjIncomeExpenseItem
+}
+
 const props = defineProps<{
   index: string | number
   totalValuePerKey: number
-  data: {
-    id: number
-    text: string
-    amount: number
-  }[]
+  data: ObjData
 }>()
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit', 'delete'])
 
 // newCashItem Placeholder description
 const description = props.index === 'Income' ? 'Income' : 'Expense'
@@ -25,6 +31,10 @@ function submitNewCashItem() {
   inputValue.value = ''
   inputAmount.value = null
 }
+
+function deleteCashItem(dataKey: string) {
+  emit('delete', props.index, dataKey)
+}
 </script>
 
 <template>
@@ -36,11 +46,8 @@ function submitNewCashItem() {
       <span class="w-70% ps-2 lg:w-50%">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
     <ul class="my-2 flex flex-col gap-4 ps-0">
-      <cash-item v-for="(item) in props.data" :key="item.id" :item="item" />
-      <new-cash-item
-        :key="index" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount"
-        :description="description" @submit="submitNewCashItem"
-      />
+      <cash-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
+      <new-cash-item v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
     </ul>
   </div>
 </template>
