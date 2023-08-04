@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref as dbRef, getDatabase, push, remove, update } from 'firebase/database'
+import { ref as dbRef, getDatabase, push, remove } from 'firebase/database'
 
 // TypeScript-Typ für eine einzelne Ausgabe (z.B. "Miete")
 type ObjIncomeExpenseItem = {
@@ -32,6 +32,11 @@ const db = getDatabase(firebaseApp)
 const usersRef = dbRef(db, 'users')
 
 function setInitialUserData() {
+  /*
+    TODO: refactor this to use a single push function and remove the remove function
+    TODO: set Config in DB and to true or false to determine if initial data should be set
+  */
+
   remove(dbRef(db, 'users/user1'))
 
   push(dbRef(db, 'users/user1/incomes/Income'), {
@@ -65,13 +70,10 @@ function setInitialUserData() {
     amount: 50,
   })
 }
-
 // setInitialUserData()
 
 const { data: users, pending, promise: usersPromise } = useDatabaseObject<UsersObject>(usersRef)
 await usersPromise.value
-
-// console.log(users.value.user1)
 
 const totalIncome = computed(() => getTotalAmount(users.value.user1.incomes))
 const totalExpenses = computed(() => getTotalAmount(users.value.user1.expenses))
@@ -109,25 +111,42 @@ function setIncomeOrExpense(object: ObjIncomeExpenseItem, index: string): void {
   // expenses[index].push(object)
 }
 
-function updateIncomeOrExpense(index: string) {
-  update(dbRef(db, `users/user1/incomes/Income/${index}`), { text: 'new text' })
+function updateIncomeOrExpense(object: ObjIncomeExpenseItem, index: string, key: string) {
+  /*
+  TODO: implement this function
+  */
+
+/*   if (index === 'Income') {
+    update(dbRef(db, `users/user1/incomes/${index}/${key}`), {
+      object
+    })
+  }
+  else {
+    update(dbRef(db, `users/user1/expenses/${index}/${key}`), {
+      object
+    })
+  }  */
 }
 
 function deleteIncomeOrExpense(index: string, key: string) {
   if (index === 'Income')
-    remove(dbRef(db, `users/user1/incomes/Income/${key}`))
+    remove(dbRef(db, `users/user1/incomes/${index}/${key}`))
   else remove(dbRef(db, `users/user1/expenses/${index}/${key}`))
 }
 
-function onSubmit(inputValue: string, inputAmount: number, index: string) {
-  // Create new income or expense object
-  const newIncomeOrExpense = {
+function createIncomeExpenseItem(text: string, amount: number): ObjIncomeExpenseItem {
+  const newIncomeExpenseItem = {
     id: getRandomNumber(0, 1_000_000),
-    text: inputValue,
-    amount: inputAmount,
+    text,
+    amount,
   }
 
-  setIncomeOrExpense(newIncomeOrExpense, index)
+  return newIncomeExpenseItem
+}
+
+function onSubmit(inputValue: string, inputAmount: number, index: string) {
+  const newIncomeExpenseItem = createIncomeExpenseItem(inputValue, inputAmount)
+  setIncomeOrExpense(newIncomeExpenseItem, index)
 }
 
 const { locale: _, t } = useI18n()
@@ -178,7 +197,4 @@ const { locale: _, t } = useI18n()
       </div>
     </div>
   </main>
-  <pre>
-    {{ users }}
-  </pre>
 </template>
