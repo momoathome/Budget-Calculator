@@ -32,7 +32,9 @@ const isDropdownOpen = ref(false)
 
     <!-- Navigation -->
     <nav
-      class="main-nav fixed left-0 top-70px z--1 h-0 w-full flex flex-col px-6 opacity-0 transition-all transition-duration-200 ease-in md:(static z-0 h-full w-auto flex-row px-0 opacity-100 transition-none) <md:bg-base"
+      id="main-nav"
+      class="fixed left-0 top-70px h-0 w-full flex-col overflow-hidden px-8 opacity-0 transition-all transition-duration-200 ease-in md:(static h-full w-auto flex-row px-0) <md:bg-base"
+      :class="{ 'h-[calc(100dvh-70px)]! z-1000 flex opacity-100': isMobileMenuActive }"
     >
       <nuxt-link to="/" class="nav-item">
         {{ t("global.overview") }}
@@ -84,7 +86,6 @@ const isDropdownOpen = ref(false)
 .box-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
 .dropDown-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -94,12 +95,6 @@ const isDropdownOpen = ref(false)
 
   .dropDown-shadow {
     box-shadow: none
-  }
-
-  .hamburger-toggle.is-active~.main-nav {
-    height: calc(100dvh - 70px);
-    opacity: 1;
-    z-index: 1000;
   }
 
   /* Hamburger Menu */
