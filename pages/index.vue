@@ -1,29 +1,28 @@
 <script lang="ts" setup>
 import { ref as dbRef, getDatabase, push, remove, set } from 'firebase/database'
 
-// TypeScript-Typ für eine einzelne Ausgabe (z.B. "Miete")
-type ObjIncomeExpenseItem = {
+type IncomeExpenseItem = {
   amount: number
-  id: number
   text: string
 }
-
-// TypeScript-Typ für die gesamten Ausgaben und Einnahmen
-type ObjIncomesExpenses = {
+type IncomeExpenseCategory = {
   [category: string]: {
-    [key: string]: ObjIncomeExpenseItem
+    [key: string]: IncomeExpenseItem
   }
 }
-
-// TypeScript-Typ für das gesamte User-Objekt
-type ObjUser = {
-  expenses: ObjIncomesExpenses
-  incomes: ObjIncomesExpenses
+type FirebaseUser = {
+  [key: string]: IncomeExpenseCategory
 }
-
-// TypeScript-Typ für das gesamte Users-Objekt
-type UsersObject = {
-  [username: string]: ObjUser
+type ObjFirebaseUsers = {
+  [key: string]: FirebaseUser
+}
+type UserObject = {
+  data: FirebaseUser
+  totalIncome: number
+  totalExpenses: number
+  totalBudget: number
+  totalIncomeValuePerKey: { [key: string]: number }
+  totalExpensesValuePerKey: { [key: string]: number }
 }
 
 // const user = useCurrentUser()
@@ -42,45 +41,39 @@ function setInitialUserData() {
   set(dbRef(db, 'users/user1/'), {
     incomes: {
       Income: {
-        0: {
-          id: 0,
+        'EU-Income-Test': {
           text: 'Paycheck',
           amount: 1_000,
         },
       },
     },
     expenses: {
-      'Utilities': {
-        0: {
-          id: 0,
-          text: 'Handy',
-          amount: 20,
-        },
-      },
       'Bills': {
-        0: {
-          id: 0,
+        'EU-Expenses-Bills-Test': {
           text: 'Miete',
           amount: 500,
         },
       },
-      'Subscriptions': {
-        0: {
-          id: 0,
+      'Living': {
+        'EU-Expenses-Living-Test': {
+          text: 'Lebensmittel',
+          amount: 200,
+        },
+      },
+      'Entertainment': {
+        'EU-Expenses-Ente-Test': {
           text: 'Netflix',
           amount: 13,
         },
       },
       'Other Expenses': {
-        0: {
-          id: 0,
-          text: 'Lebensmittel',
-          amount: 200,
+        'EU-Expenses-Other-Test': {
+          text: 'Verein',
+          amount: 20,
         },
       },
       'Savings': {
-        0: {
-          id: 0,
+        'EU-Expenses-Savings-Test': {
           text: 'Fester Wert',
           amount: 50,
         },
@@ -90,16 +83,19 @@ function setInitialUserData() {
 }
 // setInitialUserData()
 
-const { data: users, pending, promise: usersPromise } = useDatabaseObject<UsersObject>(usersRef)
+const { data: users, pending, promise: usersPromise } = useDatabaseObject<ObjFirebaseUsers>(usersRef)
 await usersPromise.value
 
-const totalIncome = computed(() => getTotalAmount(users.value!.user1.incomes))
-const totalExpenses = computed(() => getTotalAmount(users.value!.user1.expenses))
-const totalBudget = computed(() => totalIncome.value - totalExpenses.value)
-const totalIncomeValuePerKey = computed(() => getTotalValuePerKey(users.value!.user1.incomes))
-const totalExpensesValuePerKey = computed(() => getTotalValuePerKey(users.value!.user1.expenses))
+const user: UserObject = reactive({
+  data: computed<FirebaseUser>(() => users.value!.user1),
+  totalIncome: computed(() => getTotalAmount(user.data.incomes)),
+  totalExpenses: computed(() => getTotalAmount(user.data.expenses)),
+  totalBudget: computed(() => user.totalIncome - user.totalExpenses),
+  totalIncomeValuePerKey: computed(() => getTotalValuePerKey(user.data.incomes)),
+  totalExpensesValuePerKey: computed(() => getTotalValuePerKey(user.data.expenses)),
+})
 
-function getTotalAmount(object: ObjIncomesExpenses): number {
+function getTotalAmount(object: IncomeExpenseCategory): number {
   if (!object)
     return 0
 
@@ -111,7 +107,7 @@ function getTotalAmount(object: ObjIncomesExpenses): number {
   // return Object.values(object).flatMap(array => array.map(val => val.amount)).reduce((sum, amount) => sum + amount, 0)
 }
 
-function getTotalValuePerKey(object: ObjIncomesExpenses) {
+function getTotalValuePerKey(object: IncomeExpenseCategory) {
   const totalValuePerKey: { [key: string]: number } = {}
 
   Object.entries(object).forEach(([key, value]) => {
@@ -121,7 +117,7 @@ function getTotalValuePerKey(object: ObjIncomesExpenses) {
   return totalValuePerKey
 }
 
-function setIncomeOrExpense(object: ObjIncomeExpenseItem, index: string): void {
+function setIncomeOrExpense(object: IncomeExpenseItem, index: string): void {
   if (index === 'Income')
     push(dbRef(db, 'users/user1/incomes/Income'), object)
     // incomes.Income.push(object)
@@ -129,7 +125,7 @@ function setIncomeOrExpense(object: ObjIncomeExpenseItem, index: string): void {
   // expenses[index].push(object)
 }
 
-function updateIncomeOrExpense(object: ObjIncomeExpenseItem, index: string, key: string) {
+function updateIncomeOrExpense(object: IncomeExpenseItem, index: string, key: string) {
   /*
   TODO: implement this function
   */
@@ -152,9 +148,8 @@ function deleteIncomeOrExpense(index: string, key: string) {
   else remove(dbRef(db, `users/user1/expenses/${index}/${key}`))
 }
 
-function createIncomeExpenseItem(text: string, amount: number): ObjIncomeExpenseItem {
+function createIncomeExpenseItem(text: string, amount: number): IncomeExpenseItem {
   const newIncomeExpenseItem = {
-    id: getRandomNumber(0, 1_000_000),
     text,
     amount,
   }
@@ -183,7 +178,7 @@ const { locale: _, t } = useI18n()
           {{ t("main.budget") }}
         </h1>
         <h2 class="m-0 text-6xl font-extrabold">
-          {{ numberFormat(totalBudget) }}
+          {{ numberFormat(user.totalBudget) }}
         </h2>
       </div>
     </div>
@@ -193,23 +188,23 @@ const { locale: _, t } = useI18n()
         <div class="flex flex-col">
           <h3 class="mb-8 flex justify-center gap-8 text-2xl">
             {{ t("main.income") }}
-            <span class="font-extrabold">{{ numberFormat(totalIncome) }}</span>
+            <span class="font-extrabold">{{ numberFormat(user.totalIncome) }}</span>
           </h3>
           <cash-list
-            v-for="(item, key) in users!.user1.incomes" :key="key" :data="item" :index="key as string"
-            :total-value-per-key="totalIncomeValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="key"
+            :total-value-per-key="user.totalIncomeValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>
       <div class="flex flex-col">
         <h3 class="mb-8 flex justify-center gap-8 text-2xl">
           {{ t("main.expenses") }}
-          <span class="font-extrabold">{{ numberFormat(totalExpenses) }}</span>
+          <span class="font-extrabold">{{ numberFormat(user.totalExpenses) }}</span>
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-center gap-12">
           <cash-list
-            v-for="(item, key) in users!.user1.expenses" :key="key" :data="item" :index="key as string"
-            :total-value-per-key="totalExpensesValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="key"
+            :total-value-per-key="user.totalExpensesValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>

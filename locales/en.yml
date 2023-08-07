@@ -8,10 +8,10 @@ main:
   expenses: Your Expenses
 list:
   income: Incomes
-  bills: Bills
-  utilities: Utilities
+  bills: Household bills
+  living: Cost of living
+  entertainment: Entertainment
   savings: Savings
-  subscriptions: Subscriptions
   other expenses: Other Expenses
 inputs:
   income: new Income

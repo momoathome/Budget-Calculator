@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  dataKey: string | number // the firebase key
+  dataKey: string // the firebase key
   item: {
-    id: number
     text: string
     amount: number
   }

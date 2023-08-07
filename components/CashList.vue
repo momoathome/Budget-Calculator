@@ -1,16 +1,13 @@
 <script lang="ts" setup>
 type ObjIncomeExpenseItem = {
   amount: number
-  id: number
   text: string
 }
-
 type ObjData = {
   [key: string]: ObjIncomeExpenseItem
 }
-
 const props = defineProps<{
-  index: string
+  category: string
   totalValuePerKey: number
   data: ObjData
 }>()
@@ -23,22 +20,22 @@ function submitNewCashItem() {
   if (inputValue.value === '' || inputValue.value === null || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null)
     return
 
-  emit('submit', inputValue.value, +inputAmount.value, props.index)
+  emit('submit', inputValue.value, +inputAmount.value, props.category)
   inputValue.value = ''
   inputAmount.value = null
 }
 
 function deleteCashItem(dataKey: string) {
-  emit('delete', props.index, dataKey)
+  emit('delete', props.category, dataKey)
 }
 
 const { locale: _, t } = useI18n()
 
 function locales() {
-  return t(`list.${props.index.toLowerCase()}`)
+  return t(`list.${props.category.toLowerCase()}`)
 }
 // newCashItem Placeholder description
-const description = props.index === 'Income' ? 'Income' : 'Expense'
+const description = props.category === 'Income' ? 'Income' : 'Expense'
 </script>
 
 <template>

@@ -8,10 +8,10 @@ main:
   expenses: Deine Ausgaben
 list:
   income: Einnahmen
-  bills: Rechnungen
-  utilities: Notwendigkeiten
-  savings: Ersparnisse
-  subscriptions: Abonnements
+  bills: Haushaltsausgaben
+  living: Lebenshaltungskosten
+  entertainment: Unterhaltung
+  savings: Rücklagen
   other expenses: sonstige Ausgaben
 inputs:
   income: weitere Einnahmen
