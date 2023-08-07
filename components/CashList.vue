@@ -46,27 +46,33 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
       </h4>
       <span class="">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
-    <transition-group name="list" tag="ul" class="my-2 flex flex-col gap-4 ps-0">
+    <transition-group name="list" tag="ul" class="relative my-2 ps-0">
       <cash-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
       <new-cash-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
     </transition-group>
   </div>
 </template>
 
-<style scoped>
+<style>
 /*
   TODO: refine animation
 */
-.list-move, /* apply transition to moving elements */
+.list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all .5s ease;
+}
+
+.list-enter-to,
+.list-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: scale(0.6);
 }
 
 /* ensure leaving items are taken out of layout flow so that moving animations can be calculated correctly. */

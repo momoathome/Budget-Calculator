@@ -19,7 +19,7 @@ export default defineConfig({
     ['btn', 'px-4 py-2 font-medium text-sm tracking-wide capitalize transition-colors text-white transform bg-primary rounded-md border-none no-underline hover:bg-primary_light focus:( outline-none ring ring-teal-300 ring-opacity-80 )'],
     ['icon-btn', 'p-0 bg-transparent inline-block select-none border-none opacity-75 transition duration-200 ease-in-out hover:opacity-100'],
     ['list', 'list-disc list-inside'],
-    ['cashlist-item', 'list-none shadow-md flex max-w-max relative'],
+    ['cashlist-item', 'list-none shadow-md flex max-w-max mb-4'],
     ['flex-center', 'flex items-center justify-center'],
     ['grid-center', 'grid place-items-center'],
     ['nav-item', 'flex font-600 py-3 text-1.125rem <lg:text-1rem <md:border-b-solid border-b-dark-900/15 dark:border-b-nav_divider <md:border-b-1 transition transition-duration-200 md:px-3 md:h-full md:items-center hover:text-primary'],
