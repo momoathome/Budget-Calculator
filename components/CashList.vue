@@ -31,7 +31,7 @@ function deleteCashItem(dataKey: string) {
 
 const { locale: _, t } = useI18n()
 
-function locales() {
+function displayCategoryLocalValue() {
   return t(`list.${props.category.toLowerCase()}`)
 }
 // newCashItem Placeholder description
@@ -42,17 +42,35 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
   <div>
     <div class="me-2 flex justify-between px-4 text-(xl primary) font-600">
       <h4 class="m-0">
-        {{ locales() }}
-        <!-- durch locales ersetzen -->
+        {{ displayCategoryLocalValue() }}
       </h4>
       <span class="">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
-    <ul class="my-2 flex flex-col gap-4 ps-0">
+    <transition-group name="list" tag="ul" class="my-2 flex flex-col gap-4 ps-0">
       <cash-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
-      <new-cash-item v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
-    </ul>
+      <new-cash-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
+    </transition-group>
   </div>
 </template>
 
 <style scoped>
+/*
+  TODO: refine animation
+*/
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
 </style>
