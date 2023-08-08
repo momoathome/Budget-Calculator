@@ -17,6 +17,13 @@ inputs:
   income: weitere Einnahmen
   expense: weitere Ausgaben
   amount: Betrag
+auth:
+  register: Konto erstellen
+  login: Anmelden
+  alreadyRegistered: Konto bereits vorhanden?
+  email: E-Mail
+  password: Passwort
+  confirm: Passwort bestätigen
 about:
   title: Über Budget Calculator
   summary: >-

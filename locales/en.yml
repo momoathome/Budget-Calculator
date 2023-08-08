@@ -17,6 +17,13 @@ inputs:
   income: new Income
   expense: new Expense
   amount: Amount
+auth:
+  register: Create an Account
+  login: Sign In
+  alreadyRegistered: Already have an account?
+  email: email
+  password: password
+  confirm: confirm password
 about:
   title: About Budget Calculator
   summary: >-
