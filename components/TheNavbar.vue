@@ -33,7 +33,7 @@ const isDropdownOpen = ref(false)
     <!-- Navigation -->
     <nav
       id="main-nav"
-      class="fixed left-0 top-70px h-0 w-full flex-col overflow-hidden px-8 opacity-0 transition-all transition-duration-200 ease-in md:(static h-full w-auto flex-row px-0) <md:bg-base"
+      class="fixed left-0 top-70px h-0 w-full flex-col overflow-hidden px-8 opacity-0 transition-all transition-duration-200 ease-in md:(static h-full w-auto flex flex-row overflow-initial px-0 opacity-100) <md:bg-base"
       :class="{ 'h-[calc(100dvh-70px)]! z-1000 flex opacity-100': isMobileMenuActive }"
     >
       <nuxt-link to="/" class="nav-item">
@@ -53,7 +53,7 @@ const isDropdownOpen = ref(false)
           <div i="tabler-caret-down" />
         </div>
         <div
-          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:(absolute left-0 top-65px w-210px bg-base p-2) group-hover:md:visible group-hover:md:opacity-100"
+          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:(absolute left-0 top-65px z-1000 w-210px bg-base p-2) group-hover:md:visible group-hover:md:opacity-100"
           :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu"
         >
           <nuxt-link to="" class="nav-dropdown" target="_blank">
