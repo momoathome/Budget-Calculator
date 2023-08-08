@@ -39,7 +39,7 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
 </script>
 
 <template>
-  <div>
+  <div class="mx-auto">
     <div class="me-2 flex justify-between px-4 text-(xl primary) font-600">
       <h4 class="m-0">
         {{ displayCategoryLocalValue() }}

@@ -5,9 +5,7 @@ const isDropdownOpen = ref(false)
 </script>
 
 <template>
-  <header
-    class="box-shadow sticky left-0 top-0 z-10 h-70px flex justify-between bg-base px-4 lg:(static px-12) md:items-center"
-  >
+  <header class="box-shadow sticky left-0 top-0 z-10 h-70px flex justify-between bg-base px-4 lg:(static px-12) md:items-center">
     <div class="flex">
       <!-- Logo -->
       <nuxt-link
@@ -42,6 +40,9 @@ const isDropdownOpen = ref(false)
       <nuxt-link to="/about" class="nav-item">
         {{ t("global.about") }}
       </nuxt-link>
+      <nuxt-link to="/register" class="nav-item">
+        register
+      </nuxt-link>
 
       <!-- Dropdown -->
       <div
@@ -68,11 +69,13 @@ const isDropdownOpen = ref(false)
         </div>
       </div>
 
-      <div class="flex flex-col gap-3 pt-3 md:(flex-row gap-0 p-0)">
+      <div class="flex flex-col gap-4 pt-4 md:(flex-row gap-0 p-0)">
         <!-- Language toggle -->
         <locale-toggle />
         <!-- Darkmode toggle -->
         <dark-toggle />
+        <!-- Account Hub -->
+        <account-hub />
       </div>
     </nav>
   </header>
