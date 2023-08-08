@@ -62,7 +62,7 @@ export default defineNuxtConfig({
       appId: '1:868878130529:web:e2d94cf1f81da24750b920',
     },
     // ensures the auth module is enabled
-    auth: false,
+    auth: true,
   },
 
   vite: {

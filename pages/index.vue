@@ -25,11 +25,12 @@ type UserObject = {
   totalExpensesValuePerKey: { [key: string]: number }
 }
 
-// const user = useCurrentUser()
+const authUser = useCurrentUser()
 const firebaseApp = useFirebaseApp()
 const db = getDatabase(firebaseApp)
 const usersRef = dbRef(db, 'users')
 
+console.log(authUser.value)
 function setInitialUserData() {
   /*
     TODO: remove the remove function when reset is not needed anymore
@@ -102,9 +103,6 @@ function getTotalAmount(object: IncomeExpenseCategory): number {
   return Object.values(object).reduce((total, categoryExpenses) => {
     return total + Object.values(categoryExpenses).reduce((sum, expense) => sum + expense.amount, 0)
   }, 0)
-
-  // return Object.entries(object).reduce((totalValue, [, item]) => totalValue + item.amount, 0)
-  // return Object.values(object).flatMap(array => array.map(val => val.amount)).reduce((sum, amount) => sum + amount, 0)
 }
 
 function getTotalValuePerKey(object: IncomeExpenseCategory) {
@@ -120,9 +118,7 @@ function getTotalValuePerKey(object: IncomeExpenseCategory) {
 function setIncomeOrExpense(object: IncomeExpenseItem, index: string): void {
   if (index === 'Income')
     push(dbRef(db, 'users/user1/incomes/Income'), object)
-    // incomes.Income.push(object)
   else push(dbRef(db, `users/user1/expenses/${index}`), object)
-  // expenses[index].push(object)
 }
 
 function updateIncomeOrExpense(object: IncomeExpenseItem, index: string, key: string) {
@@ -170,6 +166,9 @@ const { locale: _, t } = useI18n()
   <button class="absolute right-8 top-24 btn" @click="setInitialUserData()">
     reset
   </button>
+  <button class="absolute right-8 top-34 btn" @click="onSubmit('test', 20, 'Living')">
+    testValues
+  </button>
 
   <main flex="~ 1 col" gap="8 lg:20" m="t-16">
     <div class="flex flex-col items-center">
@@ -184,24 +183,25 @@ const { locale: _, t } = useI18n()
     </div>
 
     <div class="flex flex-col gap-20 px-6 xl:px-12">
-      <div class="flex flex-col items-center">
-        <div class="flex flex-col">
-          <h3 class="mb-8 flex justify-center gap-8 text-2xl">
-            {{ t("main.income") }}
-            <span class="font-extrabold">{{ numberFormat(user.totalIncome) }}</span>
-          </h3>
+      <div class="flex flex-col">
+        <h3 class="mb-8 flex justify-center gap-8 text-2xl">
+          {{ t("main.income") }}
+          <span class="font-extrabold">{{ numberFormat(user.totalIncome) }}</span>
+        </h3>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <cash-list
             v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="key"
             :total-value-per-key="user.totalIncomeValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>
+
       <div class="flex flex-col">
         <h3 class="mb-8 flex justify-center gap-8 text-2xl">
           {{ t("main.expenses") }}
           <span class="font-extrabold">{{ numberFormat(user.totalExpenses) }}</span>
         </h3>
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-center gap-12">
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <cash-list
             v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="key"
             :total-value-per-key="user.totalExpensesValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
