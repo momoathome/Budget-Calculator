@@ -38,9 +38,9 @@ function register() {
   <div class="flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
     <div class="w-full rounded-lg shadow-elevation-7 md:mt-0 sm:max-w-md dark:bg-base">
       <div class="p-6 space-y-4 sm:p-8 md:space-y-6">
-        <h1 class="m-0 text-xl font-bold md:text-2xl">
+        <p class="m-0 text-xl font-bold md:text-2xl">
           {{ t('auth.login') }}
-        </h1>
+        </p>
         <form class="space-y-4 md:space-y-6" @submit.prevent="register">
           <div>
             <label for="email" class="mb-2 text-sm font-medium">{{ t('auth.email') }}</label>

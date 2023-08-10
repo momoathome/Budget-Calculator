@@ -19,7 +19,8 @@ inputs:
   amount: Amount
 auth:
   register: Create an Account
-  login: Sign In
+  login: Log In
+  logout: Log Out
   alreadyRegistered: Already have an account?
   email: email
   password: password

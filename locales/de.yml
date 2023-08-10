@@ -20,6 +20,7 @@ inputs:
 auth:
   register: Konto erstellen
   login: Anmelden
+  logout: Abmelden
   alreadyRegistered: Konto bereits vorhanden?
   email: E-Mail
   password: Passwort
