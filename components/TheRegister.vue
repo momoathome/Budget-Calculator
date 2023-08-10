@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
+const emit = defineEmits(['showLogin'])
 const { t } = useI18n()
 const router = useRouter()
 const email = ref('')
@@ -22,10 +23,11 @@ function register() {
     // ..
     })
 }
+const onShowLogin = () => emit('showLogin')
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
+  <div class="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
     <div class="w-full rounded-lg shadow-elevation-7 md:mt-0 sm:max-w-md dark:bg-base">
       <div class="p-6 space-y-4 sm:p-8 md:space-y-6">
         <h1 class="m-0 text-xl font-bold md:text-2xl">
@@ -54,7 +56,7 @@ function register() {
             {{ t('auth.register') }}
           </button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            {{ t('auth.alreadyRegistered') }} <a href="#" class="font-medium text-primary_dark hover:underline">Login here</a>
+            {{ t('auth.alreadyRegistered') }} <span class="cursor-pointer font-medium text-primary_dark hover:underline" @click="onShowLogin">Login here</span>
           </p>
         </form>
       </div>

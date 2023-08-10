@@ -2,6 +2,7 @@
 const { t } = useI18n()
 const isMobileMenuActive = ref(false)
 const isDropdownOpen = ref(false)
+const authUser = useCurrentUser()
 </script>
 
 <template>
@@ -35,17 +36,17 @@ const isDropdownOpen = ref(false)
       :class="{ 'h-[calc(100dvh-70px)]! z-1000 flex opacity-100': isMobileMenuActive }"
     >
       <nuxt-link to="/" class="nav-item">
+        {{ t("global.home") }}
+      </nuxt-link>
+      <nuxt-link v-if="authUser" to="/overview" class="nav-item">
         {{ t("global.overview") }}
       </nuxt-link>
       <nuxt-link to="/about" class="nav-item">
         {{ t("global.about") }}
       </nuxt-link>
-      <nuxt-link to="/register" class="nav-item">
-        register
-      </nuxt-link>
 
       <!-- Dropdown -->
-      <div
+      <!-- <div
         class="group relative block h-52px flex-col cursor-pointer md:(h-full flex) nav-item hover:md:h-auto hover:<md:pb-0"
         :class="{ '<md:h-auto <md:pb-0': isDropdownOpen }" @click="isDropdownOpen = !isDropdownOpen"
       >
@@ -67,7 +68,7 @@ const isDropdownOpen = ref(false)
             Dropdown
           </nuxt-link>
         </div>
-      </div>
+      </div> -->
 
       <div class="flex flex-col gap-4 pt-4 md:(flex-row gap-0 p-0)">
         <!-- Language toggle -->

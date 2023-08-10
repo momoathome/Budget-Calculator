@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
+const emit = defineEmits(['showRegister'])
 const { t } = useI18n()
 const router = useRouter()
 const email = ref('')
@@ -11,8 +12,7 @@ function register() {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
     // Signed in
-      console.log(auth.currentUser)
-    // router.push('/')
+      router.push('/overview')
     // ...
     })
     .catch((error) => {
@@ -32,11 +32,12 @@ function register() {
       }
     })
 }
+const onShowRegister = () => emit('showRegister')
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
-    <div class="w-full rounded-lg shadow-elevation-7 md:mt-0 sm:max-w-md dark:bg-base">
+  <div class="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
+    <div class="w-full rounded-lg bg-base shadow-elevation-7 md:mt-0 sm:max-w-md">
       <div class="p-6 space-y-4 sm:p-8 md:space-y-6">
         <p class="m-0 text-xl font-bold md:text-2xl">
           {{ t('auth.login') }}
@@ -52,9 +53,9 @@ function register() {
           </div>
           <span v-if="errorMessage" class="block font-600 text-red-800">{{ errorMessage }}</span>
           <div class="flex items-center justify-between">
-            <a href="#" class="mb-0 text-sm font-medium text-primary_dark hover:underline">
+            <span class="mb-0 cursor-pointer text-sm font-medium text-primary_dark hover:underline" @click="onShowRegister">
               {{ t('auth.register') }}
-            </a>
+            </span>
             <button type="submit" class="self-end btn">
               {{ t('auth.login') }}
             </button>

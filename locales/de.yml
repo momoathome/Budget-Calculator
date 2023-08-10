@@ -1,5 +1,6 @@
 global:
   title: Budget Calculator
+  home: Startseite
   overview: Übersicht
   about: Information
 main:
