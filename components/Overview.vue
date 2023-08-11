@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref as dbRef, getDatabase, push, remove, set } from 'firebase/database'
+import { ref as dbRef, getDatabase, push, remove, set, update } from 'firebase/database'
 
 type IncomeExpenseItem = {
   amount: number
@@ -117,20 +117,9 @@ function setIncomeOrExpense(object: IncomeExpenseItem, index: string): void {
 }
 
 function updateIncomeOrExpense(object: IncomeExpenseItem, index: string, key: string) {
-  /*
-  TODO: implement this function
-  */
-
-/*   if (index === 'Income') {
-    update(dbRef(db, `users/${authUser.value?.uid}/incomes/${index}/${key}`), {
-      object
-    })
-  }
-  else {
-    update(dbRef(db, `users/${authUser.value?.uid}/expenses/${index}/${key}`), {
-      object
-    })
-  }  */
+  if (index === 'Income')
+    update(dbRef(db, `users/${authUser.value?.uid}/incomes/${index}/${key}`), object)
+  else update(dbRef(db, `users/${authUser.value?.uid}/expenses/${index}/${key}`), object)
 }
 
 function deleteIncomeOrExpense(index: string, key: string) {
@@ -148,9 +137,13 @@ function createIncomeExpenseItem(text: string, amount: number): IncomeExpenseIte
   return newIncomeExpenseItem
 }
 
-function onSubmit(inputValue: string, inputAmount: number, index: string) {
+function onSubmit(index: string, inputValue: string, inputAmount: number) {
   const newIncomeExpenseItem = createIncomeExpenseItem(inputValue, inputAmount)
   setIncomeOrExpense(newIncomeExpenseItem, index)
+}
+function onUpdate(index: string, inputValue: string, inputAmount: number, key: string) {
+  const newIncomeExpenseItem = createIncomeExpenseItem(inputValue, inputAmount)
+  updateIncomeOrExpense(newIncomeExpenseItem, index, key)
 }
 
 const { locale: _, t } = useI18n()
@@ -160,7 +153,7 @@ const { locale: _, t } = useI18n()
   <button class="absolute right-8 top-24 btn" @click="setInitialUserData()">
     reset
   </button>
-  <button class="absolute right-8 top-34 btn" @click="onSubmit('test', 20, 'Living')">
+  <button class="absolute right-8 top-34 btn" @click="onSubmit('Living', 'test', 20)">
     testValues
   </button>
 
@@ -185,7 +178,7 @@ const { locale: _, t } = useI18n()
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <income-expense-list
             v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="key"
-            :total-value-per-key="user.totalIncomeValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            :total-value-per-key="user.totalIncomeValuePerKey[key]" @update="onUpdate" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>
@@ -198,7 +191,7 @@ const { locale: _, t } = useI18n()
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <income-expense-list
             v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="key"
-            :total-value-per-key="user.totalExpensesValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            :total-value-per-key="user.totalExpensesValuePerKey[key]" @update="onUpdate" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
         </div>
       </div>

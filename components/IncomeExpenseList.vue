@@ -12,21 +12,26 @@ const props = defineProps<{
   data: ObjData
 }>()
 
-const emit = defineEmits(['submit', 'delete'])
+const emit = defineEmits(['submit', 'delete', 'update'])
 const inputValue = ref<string>()
-const inputAmount = ref<number | string | null>(null)
+const inputAmount = ref<number | string>()
 
-function submitNewCashItem() {
+function submitNewIncomeExpenseItem() {
   if (inputValue.value === '' || inputValue.value === null || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null)
     return
 
-  emit('submit', inputValue.value, +inputAmount.value, props.category)
+  emit('submit', props.category, inputValue.value, parseLocaleNumber(inputAmount.value))
   inputValue.value = ''
-  inputAmount.value = null
+  inputAmount.value = ''
 }
-
-function deleteCashItem(dataKey: string) {
+function deleteIncomeExpenseItem(dataKey: string) {
   emit('delete', props.category, dataKey)
+}
+function updateIncomeExpenseItem(inputValue: string, inputAmount: number, dataKey: string) {
+  if (inputValue === '' || inputAmount === undefined || inputAmount === null || Number.isNaN(inputAmount))
+    return
+
+  emit('update', props.category, inputValue, inputAmount, dataKey)
 }
 
 const { locale: _, t } = useI18n()
@@ -34,7 +39,7 @@ const { locale: _, t } = useI18n()
 function displayCategoryLocalValue() {
   return t(`list.${props.category.toLowerCase()}`)
 }
-// newCashItem Placeholder description
+// newIncomeExpenseListItem Placeholder description
 const description = props.category === 'Income' ? 'Income' : 'Expense'
 </script>
 
@@ -46,9 +51,9 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
       </h4>
       <span class="">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
-    <transition-group name="list" tag="ul" class="relative my-2 ps-0">
-      <income-expense-list-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
-      <income-expense-list-new-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
+    <transition-group name="list" tag="ul" class="relative my-2 max-w-md ps-0">
+      <income-expense-list-item v-for="(item, key) in props.data" :key="key" :data-key="key" :item="item" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />
+      <income-expense-list-new-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewIncomeExpenseItem" />
     </transition-group>
   </div>
 </template>

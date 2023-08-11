@@ -16,7 +16,7 @@ function onInput(e) {
 
 // Vue 3.3 Experimental
 const inputValue = defineModel<string | number>('inputValue')
-const inputAmount = defineModel<number | string | null>('inputAmount')
+const inputAmount = defineModel<number | string>('inputAmount')
 const onSubmit = () => emit('submit', props.description)
 
 const { locale: _, t } = useI18n()
@@ -28,17 +28,11 @@ function locales() {
 <template>
   <li class="cashlist-item text-primary">
     <form action="" class="relative flex" @submit.prevent="onSubmit">
-      <input
-        v-model="inputValue" type="text" :placeholder="`${locales()}`"
-        class="me-1 w-full border-none bg-base py-4 ps-4 text-(xl base_dark) font-600 outline-2 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid placeholder-text-primary_light) placeholder:(font-600 text-primary)"
-      >
+      <AppInput id="1" v-model:inputValue="inputValue" :placeholder="locales()" class="me-1 w-full outline-primary! placeholder:text-primary!" />
       <div class="pointer-events-none bg-base">
         <span class="mt-6px inline-block h-75% w-2px bg-list_divider" />
       </div>
-      <input
-        v-model="inputAmount" type="number" :placeholder="t('inputs.amount')" min="0" step="0.01"
-        class="ms-1 w-70% border-none bg-base px-4 py-4 text-(xl base_dark) font-600 outline-2 outline-primary hover:(cursor-pointer outline-solid) focus-visible:(cursor-text outline-solid placeholder-text-primary_light) placeholder:(font-600 text-primary)"
-      >
+      <AppInput id="2" v-model:inputValue="inputAmount" :placeholder="t('inputs.amount')" class="ms-1 w-70% outline-primary! placeholder:text-primary!" min="0" step="0.01" />
 
       <button type="submit" class="absolute right-4 top-5 text-2xl" prevent="default" i-tabler-circle-plus />
     </form>
