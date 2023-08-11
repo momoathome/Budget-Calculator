@@ -47,8 +47,8 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
       <span class="">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
     <transition-group name="list" tag="ul" class="relative my-2 ps-0">
-      <cash-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
-      <new-cash-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
+      <income-expense-list-item v-for="(item, key) in props.data" :key="key" :item="item" :data-key="key" @delete="deleteCashItem" />
+      <income-expense-list-new-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewCashItem" />
     </transition-group>
   </div>
 </template>

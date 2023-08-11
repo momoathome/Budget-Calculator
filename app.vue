@@ -5,12 +5,12 @@ const authUser = useCurrentUser()
 
 // reagiert auf Änderungen des authUsers
 onMounted(() => {
-  watch(authUser, (user, prevUser) => {
-    if (prevUser && !user) {
+  watch(authUser, (currentUser, prevUser) => {
+    if (prevUser && !currentUser) {
       // user logged out
       router.push('/')
     }
-    else if (user && typeof route.query.redirect === 'string') {
+    else if (currentUser && typeof route.query.redirect === 'string') {
       // user logged in
       router.push(route.query.redirect)
     }

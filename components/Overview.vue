@@ -183,7 +183,7 @@ const { locale: _, t } = useI18n()
           <span class="font-extrabold">{{ numberFormat(user.totalIncome) }}</span>
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
-          <cash-list
+          <income-expense-list
             v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="key"
             :total-value-per-key="user.totalIncomeValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />
@@ -196,7 +196,7 @@ const { locale: _, t } = useI18n()
           <span class="font-extrabold">{{ numberFormat(user.totalExpenses) }}</span>
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
-          <cash-list
+          <income-expense-list
             v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="key"
             :total-value-per-key="user.totalExpensesValuePerKey[key]" @submit="onSubmit" @delete="deleteIncomeOrExpense"
           />

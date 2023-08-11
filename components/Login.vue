@@ -32,6 +32,16 @@ function register() {
       }
     })
 }
+
+function testRegister() {
+  signInWithEmailAndPassword(auth, 'giveheb472@v1zw.com', 'test1234')
+    .then((data) => {
+    // Signed in
+      router.push('/overview')
+    // ...
+    })
+}
+
 const onShowRegister = () => emit('showRegister')
 </script>
 
@@ -61,6 +71,11 @@ const onShowRegister = () => emit('showRegister')
             </button>
           </div>
         </form>
+        <div class="flex justify-end">
+          <button type="button" class="bg-blueGray-5 btn hover:bg-blueGray-7" @click="testRegister">
+            test Login
+          </button>
+        </div>
       </div>
     </div>
   </div>

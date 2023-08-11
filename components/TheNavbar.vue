@@ -72,11 +72,11 @@ const authUser = useCurrentUser()
 
       <div class="flex flex-col gap-4 pt-4 md:(flex-row gap-0 p-0)">
         <!-- Language toggle -->
-        <locale-toggle />
+        <the-locale-toggle />
         <!-- Darkmode toggle -->
-        <dark-toggle />
+        <the-dark-toggle />
         <!-- Account Hub -->
-        <account-hub />
+        <the-account-hub />
       </div>
     </nav>
   </header>
