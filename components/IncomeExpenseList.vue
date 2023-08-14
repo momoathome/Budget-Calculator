@@ -13,16 +13,9 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['submit', 'delete', 'update'])
-const inputValue = ref<string>()
-const inputAmount = ref<number | string>()
 
-function submitNewIncomeExpenseItem() {
-  if (inputValue.value === '' || inputValue.value === null || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null)
-    return
-
-  emit('submit', props.category, inputValue.value, parseLocaleNumber(inputAmount.value))
-  inputValue.value = ''
-  inputAmount.value = ''
+function submitNewIncomeExpenseItem(inputValue: string, inputAmount: number) {
+  emit('submit', props.category, inputValue, inputAmount)
 }
 function deleteIncomeExpenseItem(dataKey: string) {
   emit('delete', props.category, dataKey)
@@ -53,7 +46,7 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
     </div>
     <transition-group name="list" tag="ul" class="relative my-2 max-w-md ps-0">
       <income-expense-list-item v-for="(item, key) in props.data" :key="key" :data-key="key" :item="item" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />
-      <income-expense-list-new-item :key="category" v-model:inputValue="inputValue" v-model:inputAmount="inputAmount" :description="description" @submit="submitNewIncomeExpenseItem" />
+      <income-expense-list-new-item :key="category" :description="description" @submit="submitNewIncomeExpenseItem" />
     </transition-group>
   </div>
 </template>

@@ -15,9 +15,17 @@ function onInput(e) {
 } */
 
 // Vue 3.3 Experimental
-const inputValue = defineModel<string | number>('inputValue')
-const inputAmount = defineModel<number | string>('inputAmount')
-const onSubmit = () => emit('submit', props.description)
+const inputValue = ref<string>()
+const inputAmount = ref<string>()
+
+function onSubmit() {
+  if (inputValue.value === '' || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null)
+    return
+
+  emit('submit', inputValue.value, parseLocaleNumber(inputAmount.value))
+  inputValue.value = ''
+  inputAmount.value = ''
+}
 
 const { locale: _, t } = useI18n()
 function locales() {
