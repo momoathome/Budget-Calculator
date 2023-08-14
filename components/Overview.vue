@@ -14,6 +14,7 @@ type FirebaseUser = {
   [key: string]: IncomeExpenseCategory
 }
 type UserObject = {
+  uid: string
   data: FirebaseUser
   totalIncome: number
   totalExpenses: number
@@ -83,6 +84,7 @@ const { data: users, pending, promise: usersPromise } = useDatabaseObject<Fireba
 await usersPromise.value
 
 const user: UserObject = reactive({
+  uid: authUser.value?.uid,
   data: computed(() => users.value),
   totalIncome: computed(() => getTotalAmount(user.data.incomes)),
   totalExpenses: computed(() => getTotalAmount(user.data.expenses)),
@@ -112,20 +114,20 @@ function getTotalValuePerKey(object: IncomeExpenseCategory) {
 
 function setIncomeOrExpense(object: IncomeExpenseItem, index: string): void {
   if (index === 'Income')
-    push(dbRef(db, `users/${authUser.value?.uid}/incomes/Income`), object)
-  else push(dbRef(db, `users/${authUser.value?.uid}/expenses/${index}`), object)
+    push(dbRef(db, `users/${user.uid}/incomes/Income`), object)
+  else push(dbRef(db, `users/${user.uid}/expenses/${index}`), object)
 }
 
-function updateIncomeOrExpense(object: IncomeExpenseItem, index: string, key: string) {
+function updateIncomeOrExpense(object: IncomeExpenseItem, index: string, key: string): void {
   if (index === 'Income')
-    update(dbRef(db, `users/${authUser.value?.uid}/incomes/${index}/${key}`), object)
-  else update(dbRef(db, `users/${authUser.value?.uid}/expenses/${index}/${key}`), object)
+    update(dbRef(db, `users/${user.uid}/incomes/${index}/${key}`), object)
+  else update(dbRef(db, `users/${user.uid}/expenses/${index}/${key}`), object)
 }
 
-function deleteIncomeOrExpense(index: string, key: string) {
+function deleteIncomeOrExpense(index: string, key: string): void {
   if (index === 'Income')
-    remove(dbRef(db, `users/${authUser.value?.uid}/incomes/${index}/${key}`))
-  else remove(dbRef(db, `users/${authUser.value?.uid}/expenses/${index}/${key}`))
+    remove(dbRef(db, `users/${user.uid}/incomes/${index}/${key}`))
+  else remove(dbRef(db, `users/${user.uid}/expenses/${index}/${key}`))
 }
 
 function createIncomeExpenseItem(text: string, amount: number): IncomeExpenseItem {
@@ -145,11 +147,16 @@ function onUpdate(index: string, inputValue: string, inputAmount: number, key: s
   const newIncomeExpenseItem = createIncomeExpenseItem(inputValue, inputAmount)
   updateIncomeOrExpense(newIncomeExpenseItem, index, key)
 }
+function onDelete(index: string, key: string) {
+  deleteIncomeOrExpense(index, key)
+}
 
 const { locale: _, t } = useI18n()
 </script>
 
 <template>
+  <!-- eslint-disable vue/no-extra-parens -->
+
   <button class="absolute right-8 top-24 btn" @click="setInitialUserData()">
     reset
   </button>
@@ -177,8 +184,8 @@ const { locale: _, t } = useI18n()
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <income-expense-list
-            v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="key"
-            :total-value-per-key="user.totalIncomeValuePerKey[key]" @update="onUpdate" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="(key as string)"
+            :total-value-per-key="user.totalIncomeValuePerKey[key]" @update="onUpdate" @submit="onSubmit" @delete="onDelete"
           />
         </div>
       </div>
@@ -190,8 +197,8 @@ const { locale: _, t } = useI18n()
         </h3>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <income-expense-list
-            v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="key"
-            :total-value-per-key="user.totalExpensesValuePerKey[key]" @update="onUpdate" @submit="onSubmit" @delete="deleteIncomeOrExpense"
+            v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="(key as string)"
+            :total-value-per-key="user.totalExpensesValuePerKey[key]" @update="onUpdate" @submit="onSubmit" @delete="onDelete"
           />
         </div>
       </div>

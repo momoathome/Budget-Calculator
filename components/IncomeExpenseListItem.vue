@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
   dataKey: string // the firebase key
+  category: string
   item: {
     text: string
     amount: number
@@ -17,12 +18,15 @@ watch(focused, (focused) => {
   if (focused)
     inputAmount.value = parseLocaleNumber(inputAmount.value)
     // console.log('input element has been focused')
-  else inputAmount.value = numberFormat(inputAmount.value)
+  else inputAmount.value = numberFormat(props.item.amount)
 })
 
-// console.log(parseLocaleNumber(formatedAmount))
+function onChange() {
+  if (inputValue.value === '' || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null || Number.isNaN(parseLocaleNumber(inputAmount.value)))
+    return
 
-const onChange = () => emit('update', inputValue.value, parseLocaleNumber(inputAmount.value), props.dataKey)
+  emit('update', inputValue.value, parseLocaleNumber(inputAmount.value), props.dataKey)
+}
 const onDelete = () => emit('delete', props.dataKey)
 </script>
 

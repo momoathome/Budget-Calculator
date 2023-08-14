@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  description: string
+  category: string
 }>()
 
 const emit = defineEmits(['submit'])
@@ -29,7 +29,9 @@ function onSubmit() {
 
 const { locale: _, t } = useI18n()
 function locales() {
-  return t(`inputs.${props.description.toLowerCase()}`)
+  const description = props.category === 'Income' ? 'Income' : 'Expense'
+
+  return t(`inputs.${description.toLowerCase()}`)
 }
 </script>
 

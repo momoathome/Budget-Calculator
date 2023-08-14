@@ -21,9 +21,6 @@ function deleteIncomeExpenseItem(dataKey: string) {
   emit('delete', props.category, dataKey)
 }
 function updateIncomeExpenseItem(inputValue: string, inputAmount: number, dataKey: string) {
-  if (inputValue === '' || inputAmount === undefined || inputAmount === null || Number.isNaN(inputAmount))
-    return
-
   emit('update', props.category, inputValue, inputAmount, dataKey)
 }
 
@@ -32,8 +29,6 @@ const { locale: _, t } = useI18n()
 function displayCategoryLocalValue() {
   return t(`list.${props.category.toLowerCase()}`)
 }
-// newIncomeExpenseListItem Placeholder description
-const description = props.category === 'Income' ? 'Income' : 'Expense'
 </script>
 
 <template>
@@ -45,8 +40,9 @@ const description = props.category === 'Income' ? 'Income' : 'Expense'
       <span class="">{{ numberFormat(totalValuePerKey) }}</span>
     </div>
     <transition-group name="list" tag="ul" class="relative my-2 max-w-md ps-0">
-      <income-expense-list-item v-for="(item, key) in props.data" :key="key" :data-key="key" :item="item" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />
-      <income-expense-list-new-item :key="category" :description="description" @submit="submitNewIncomeExpenseItem" />
+      <!--  eslint-disable-next-line vue/no-extra-parens -->
+      <income-expense-list-item v-for="(item, key) in props.data" :key="key" :data-key="(key as string)" :item="item" :category="category" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />
+      <income-expense-list-new-item :key="category" :category="category" @submit="submitNewIncomeExpenseItem" />
     </transition-group>
   </div>
 </template>
