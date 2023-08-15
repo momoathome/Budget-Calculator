@@ -29,8 +29,8 @@ function handleSignOut() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
-    <div class="w-full rounded-lg bg-base shadow-elevation-7 md:mt-0 sm:max-w-md">
+  <div class="flex flex-col items-center justify-center">
+    <div class="w-full rounded-lg bg-base shadow-elevation-7 sm:max-w-md">
       <div class="p-6 space-y-4 sm:p-8 md:space-y-6">
         <div class="flex items-center gap-2">
           <div i="tabler-user-circle" class="text-4xl" />
