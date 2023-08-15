@@ -55,7 +55,7 @@ const authUser = useCurrentUser()
           <div i="tabler-caret-down" />
         </div>
         <div
-          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:(absolute left-0 top-65px z-1000 w-210px bg-base p-2) group-hover:md:visible group-hover:md:opacity-100"
+          class="dropDown-shadow invisible flex flex-col opacity-0 transition md:(absolute left-0 top-16 z-1000 w-210px bg-base p-2) group-hover:md:visible group-hover:md:opacity-100"
           :class="{ '<md:visible! <md:opacity-100!': isDropdownOpen }" aria-label="submenu"
         >
           <nuxt-link to="" class="nav-dropdown" target="_blank">
@@ -76,7 +76,7 @@ const authUser = useCurrentUser()
         <!-- Darkmode toggle -->
         <the-dark-toggle />
         <!-- Account Hub -->
-        <the-account-hub />
+        <the-account-hub v-if="authUser" />
       </div>
     </nav>
   </header>
