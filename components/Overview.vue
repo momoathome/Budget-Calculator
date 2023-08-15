@@ -14,7 +14,7 @@ type FirebaseUser = {
   [key: string]: IncomeExpenseCategory
 }
 type UserObject = {
-  uid: string
+  uid: string | undefined
   data: FirebaseUser
   totalIncome: number
   totalExpenses: number
@@ -33,9 +33,9 @@ function setInitialUserData() {
     TODO: set Config in DB and to true or false to determine if initial data should be set
   */
 
-  remove(dbRef(db, `users/${authUser.value?.uid}`))
+  remove(userRef)
 
-  set(dbRef(db, `users/${authUser.value?.uid}`), {
+  set(userRef, {
     incomes: {
       Income: {
         'EU-Income-Test': {
@@ -85,7 +85,7 @@ await usersPromise.value
 
 const user: UserObject = reactive({
   uid: authUser.value?.uid,
-  data: computed(() => users.value),
+  data: computed(() => users.value!),
   totalIncome: computed(() => getTotalAmount(user.data.incomes)),
   totalExpenses: computed(() => getTotalAmount(user.data.expenses)),
   totalBudget: computed(() => user.totalIncome - user.totalExpenses),
@@ -156,13 +156,19 @@ const { locale: _, t } = useI18n()
 
 <template>
   <!-- eslint-disable vue/no-extra-parens -->
-
-  <button class="absolute right-8 top-24 btn" @click="setInitialUserData()">
-    reset
-  </button>
-  <button class="absolute right-8 top-34 btn" @click="onSubmit('Living', 'test', 20)">
-    testValues
-  </button>
+  <div class="absolute left-8 top-24 rounded-md px-8 py-6 shadow-lg">
+    <p class="m-0 mb-4 text-xl font-600">
+      Test Menu
+    </p>
+    <div class="flex flex-col gap-4">
+      <button class="btn" @click="setInitialUserData()">
+        reset
+      </button>
+      <button class="btn" @click="onSubmit('Living', 'test', 20)">
+        testValues
+      </button>
+    </div>
+  </div>
 
   <main flex="~ 1 col" gap="8 lg:20" m="t-16">
     <div class="flex flex-col items-center">
