@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const emit = defineEmits(['showLogin'])
 const { t } = useI18n()
 const router = useRouter()
 const email = ref('')
 const password = ref('')
-const auth = getAuth()
+const auth = useFirebaseAuth()!
 function register() {
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {

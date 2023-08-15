@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 
 const { t } = useI18n()
 const router = useRouter()
 const isLoggedIn = ref(false)
-const auth = getAuth()
+const auth = useFirebaseAuth()!
+const authUser = useCurrentUser()
 
 onMounted(() => {
   onAuthStateChanged(auth, (user) => {
@@ -34,7 +35,7 @@ function handleSignOut() {
         <div class="flex items-center gap-2">
           <div i="tabler-user-circle" class="text-4xl" />
           <p class="m-0 font-bold">
-            mknoll1901@gmail.com
+            {{ authUser?.email }}
           </p>
         </div>
         <div class="flex justify-end">
