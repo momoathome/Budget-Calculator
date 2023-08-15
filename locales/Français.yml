@@ -1,0 +1,38 @@
+global:
+  title: Calculateur de budget
+  home: Accueil
+  overview: Aperçu
+  about: À propos
+main:
+  budget: Budget
+  income: Revenu
+  expenses: Dépenses
+list:
+  income: Revenus
+  bills: Household bills
+  living: Cost of living
+  entertainment: Entertainment
+  savings: Savings
+  other expenses: Other Expenses
+inputs:
+  income: nouveaux revenus
+  expense: nouvelle dépense
+  amount: montant
+auth:
+  register: Create an Account
+  login: Log In
+  logout: Log Out
+  alreadyRegistered: Already have an account?
+  email: email
+  password: password
+  confirm: confirm password
+about:
+  title: About Budget Calculator
+  summary: >-
+    The Budget Calculator is a simple, fast, and clean Calculator for your Income and Expenses.
+  config: >-
+    On top of that, it contains little helpers to help with localization,
+    color schemes, and even a configuration for ESLint and VSCode.
+theme:
+  dark: Dark
+  light: Light
