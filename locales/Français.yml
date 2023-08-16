@@ -9,20 +9,20 @@ main:
   expenses: Dépenses
 list:
   income: Revenus
-  bills: Household bills
-  living: Cost of living
-  entertainment: Entertainment
-  savings: Savings
-  other expenses: Other Expenses
+  bills: Factures de ménage
+  living: Coût de la vie
+  entertainment: Divertissements
+  savings: Épargne
+  other expenses: Autres dépenses
 inputs:
   income: nouveaux revenus
   expense: nouvelle dépense
   amount: montant
 auth:
-  register: Create an Account
+  register: Créer un compte
   login: Log In
   logout: Log Out
-  alreadyRegistered: Already have an account?
+  alreadyRegistered: Vous avez déjà un compte ?
   email: email
   password: password
   confirm: confirm password
