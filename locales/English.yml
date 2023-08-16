@@ -26,6 +26,13 @@ auth:
   email: email
   password: password
   confirm: confirm password
+info:
+  income: This includes salary, bonuses, child benefit, alimony, rental income, interest, etc.
+  bills: This includes rent, loan installments, water, heating, gas, electricity, waste disposal, as well as taxes and insurance.
+  living: This includes groceries, clothing, shoes, personal care items, transportation, haircuts, mobile phone, internet, broadcasting fees, as well as expenses for pets.
+  entertainment: This includes leisure activities, vacations, hobbies, clubs, streaming services, alcohol, and tobacco.
+  savings: This includes reserves for larger purchases, unforeseen expenses, as well as retirement savings.
+  other expenses: This includes all expenses that do not fit into the other categories.
 about:
   title: About Budget Calculator
   summary: >-

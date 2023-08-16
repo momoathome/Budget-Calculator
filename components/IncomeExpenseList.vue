@@ -26,19 +26,27 @@ function updateIncomeExpenseItem(inputValue: string, inputAmount: number, dataKe
 
 const { locale: _, t } = useI18n()
 
-function displayCategoryLocalValue() {
-  return t(`list.${props.category.toLowerCase()}`)
-}
+const categoryInfo = ref()
+const isHovered = useElementHover(categoryInfo)
 </script>
 
 <template>
-  <div class="mx-auto">
-    <div class="me-2 flex justify-between px-4 text-(xl primary) font-600">
+  <div class="relative mx-auto">
+    <div class="me-2 flex px-4 text-(xl primary) font-600">
       <h4 class="m-0">
-        {{ displayCategoryLocalValue() }}
+        {{ t(`list.${props.category.toLowerCase()}`) }}
       </h4>
-      <span class="">{{ numberFormat(totalValuePerKey) }}</span>
+      <div class="flex-grow-1">
+        <span ref="categoryInfo" i="tabler-info-circle" class="ms-1 text-xl" />
+        <AppCategoryInfo v-if="isHovered">
+          {{ t(`info.${props.category.toLowerCase()}`) }}
+        </AppCategoryInfo>
+      </div>
+      <span>
+        {{ numberFormat(totalValuePerKey) }}
+      </span>
     </div>
+
     <transition-group name="list" tag="ul" class="relative my-2 max-w-md ps-0">
       <!--  eslint-disable-next-line vue/no-extra-parens -->
       <income-expense-list-item v-for="(item, key) in props.data" :key="key" :data-key="(key as string)" :item="item" :category="category" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />

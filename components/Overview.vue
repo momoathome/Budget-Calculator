@@ -60,13 +60,13 @@ function setInitialUserData() {
       'Entertainment': {
         'EU-Expenses-Ente-Test': {
           text: 'Netflix',
-          amount: 13,
+          amount: 11,
         },
       },
       'Other Expenses': {
         'EU-Expenses-Other-Test': {
-          text: 'Verein',
-          amount: 20,
+          text: 'iCloud',
+          amount: 2.5,
         },
       },
       'Savings': {

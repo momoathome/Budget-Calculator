@@ -1,5 +1,5 @@
 global:
-  title: Budget Calculator
+  title: Budget Rechner
   home: Startseite
   overview: Übersicht
   about: Information
@@ -26,10 +26,17 @@ auth:
   email: E-Mail
   password: Passwort
   confirm: Passwort bestätigen
+info:
+  income: hierzu zählen Gehalt, Sonderzahlungen, Kindergeld, Unterhalt, Mieteinnahmen, Zinsen, etc.
+  bills: hierzu zählen Miete, Kreditraten, Wasser, Heizung, Gas, Strom und Abfallentsorgung, sowie Steuern und Versicherungen.
+  living: hierzu zählen Lebensmittel, Kleidung, Schuhe, Hygieneartikel, Fortbewegungsmittel, Friseur, Handy, Internet, Rundfunkgebühren, sowie Ausgaben für Haustiere.
+  entertainment: hierzu zählen Freizeitaktivitäten, Urlaub, Hobbys, Vereine, Streamingdienste, Alkohol und Tabak.
+  savings: hierzu zählen Rücklagen für größere Anschaffungen, unvorhergesehene Ausgaben, sowie für die Altersvorsorge.
+  other expenses: hierzu zählen alle Ausgaben, die nicht in die anderen Kategorien passen.
 about:
-  title: Über Budget Calculator
+  title: Über Budget Rechner
   summary: >-
-    der Budget Calculator ist ein einfacher, schneller, und Überichtlicher Rechner für Ihre Einnahmen und Ausgaben.
+    der Budget Rechner ist ein einfacher, schneller, und Überichtlicher Rechner für Ihre Einnahmen und Ausgaben.
   config: >-
     Darüber hinaus enthält es kleine Hilfsprogramme, die bei der Lokalisierung helfen,
     Farbschemata und sogar eine Konfiguration für ESLint und VSCode.
