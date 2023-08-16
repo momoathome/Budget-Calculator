@@ -16,8 +16,8 @@ onClickOutside(target, () => isMenuShown.value = false, { ignore: [ignoreElRef] 
       </p>
 
       <div class="relative">
-        <button ref="ignoreElRef" type="button" class="flex cursor-pointer items-center rounded-md border-none shadow-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" @click="isMenuShown = !isMenuShown">
-          <svg xmlns="http://www.w3.org/2000/svg" class="" width="20" height="20" viewBox="0 0 24 24">
+        <button ref="ignoreElRef" type="button" class="flex cursor-pointer items-center px-1 icon-btn" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" @click="isMenuShown = !isMenuShown">
+          <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 24 24">
             <path
               fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m5 8l6 6m-7 0l6-6l2-3M2 5h12M7 2h1m14 20l-5-10l-5 10m2-4h6"
@@ -25,7 +25,7 @@ onClickOutside(target, () => isMenuShown.value = false, { ignore: [ignoreElRef] 
           </svg>
         </button>
         <transition>
-          <div v-show="isMenuShown" ref="target" class="absolute left--2 top-10 z-10 flex flex-col items-center justify-center bg-base">
+          <div v-show="isMenuShown" ref="target" class="absolute left--2 top-10 z-10 flex flex-col items-center justify-center">
             <div class="w-full rounded-lg bg-base shadow-elevation-7 sm:max-w-md">
               <ul class="max-h-56 w-full py-2 sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-1">
                 <li v-for="locale of availableLocales" :key="locale" class="relative flex cursor-pointer py-2 pr-10 ps-4 text-size-base font-600 hover:bg-list_divider" tabindex="0" role="option" @click="currentLocale = locale">
