@@ -13,6 +13,5 @@ const showLogin = ref(true)
   <div class="flex justify-center">
     <Login v-if="!authUser && showLogin" @show-register="showLogin = false" />
     <TheRegister v-if="!authUser && !showLogin" @show-login="showLogin = true" />
-    <Logout v-if="authUser" />
   </div>
 </template>
