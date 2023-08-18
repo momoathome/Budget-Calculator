@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import type { DatabaseReference } from 'firebase/database'
+import { ref as dbRef, getDatabase, push, update } from 'firebase/database'
+
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const emit = defineEmits(['showLogin'])
@@ -7,13 +10,23 @@ const router = useRouter()
 const email = ref('')
 const password = ref('')
 const auth = useFirebaseAuth()!
+const firebaseApp = useFirebaseApp()
+const db = getDatabase(firebaseApp)
+
 function register() {
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user
-      console.log(`User created${user} - ${auth.currentUser}`)
-      // router.push('/')
+      /* TODO: succesfully registerd message */
+      // console.log(`User created${user.email} - ${authUser.currentUser}`)
+
+      const userRef = dbRef(db, `users/${user.uid}`)
+      setInitialUserData(userRef)
+
+      setTimeout(() => {
+        router.push('/overview')
+      }, 1000)
     // ...
     })
     .catch((error) => {
@@ -23,6 +36,39 @@ function register() {
     // ..
     })
 }
+
+function setInitialUserData(userRef: DatabaseReference): void {
+  const newPostKey = push(userRef).key!
+
+  const initialUserData: any = {}
+  initialUserData[`/incomes/Income/${newPostKey}`] = {
+    text: 'Paycheck',
+    amount: 1_000,
+  }
+  initialUserData[`/expenses/Bills/${newPostKey}`] = {
+    text: 'Miete',
+    amount: 500,
+  }
+  initialUserData[`/expenses/Living/${newPostKey}`] = {
+    text: 'Lebensmittel',
+    amount: 200,
+  }
+  initialUserData[`/expenses/Entertainment/${newPostKey}`] = {
+    text: 'Netflix',
+    amount: 11,
+  }
+  initialUserData[`/expenses/Other Expenses/${newPostKey}`] = {
+    text: 'iCloud',
+    amount: 2.5,
+  }
+  initialUserData[`/expenses/Savings/${newPostKey}`] = {
+    text: 'Fester Wert',
+    amount: 50,
+  }
+
+  update(userRef, initialUserData)
+}
+
 const onShowLogin = () => emit('showLogin')
 </script>
 
