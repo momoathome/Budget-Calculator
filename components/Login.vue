@@ -72,7 +72,7 @@ const onShowRegister = () => emit('showRegister')
           </div>
         </form>
         <div class="flex justify-end">
-          <button type="button" class="bg-blueGray-5 btn hover:bg-blueGray-7" @click="testRegister">
+          <button type="button" class="bg-primary_darkerer hover:bg-primary_darkest btn dark:text-base_dark" @click="testRegister">
             test Login
           </button>
         </div>

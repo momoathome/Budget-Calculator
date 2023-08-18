@@ -156,7 +156,7 @@ const { locale: _, t } = useI18n()
 
 <template>
   <!-- eslint-disable vue/no-extra-parens -->
-  <div class="absolute left-8 top-24 rounded-md px-8 py-6 shadow-lg">
+  <div class="absolute left-8 top-24 rounded-md px-8 py-6 shadow-lg dark:bg-secondary">
     <p class="m-0 mb-4 text-xl font-600">
       Test Menu
     </p>

@@ -42,7 +42,7 @@ function locales() {
   <li class="cashlist-item text-primary">
     <form action="" class="relative flex" @submit.prevent="onSubmit">
       <AppInput :key="category + 1" v-model:inputValue="inputValue" :placeholder="locales()" class="me-1 w-full outline-primary! placeholder:text-primary!" />
-      <div class="pointer-events-none bg-base">
+      <div class="pointer-events-none">
         <span class="mt-6px inline-block h-75% w-2px bg-list_divider" />
       </div>
       <AppInput :key="category + 2" v-model:inputValue="inputAmount" :placeholder="t('inputs.amount')" class="ms-1 w-70% outline-primary! placeholder:text-primary!" min="0" step="0.01" />

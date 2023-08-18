@@ -34,7 +34,7 @@ const onDelete = () => emit('delete', props.dataKey)
   <li class="cashlist-item">
     <form action="" class="relative flex" @input="onChange">
       <AppInput v-model:inputValue="inputValue" class="me-1 w-full" />
-      <div class="pointer-events-none bg-base">
+      <div class="pointer-events-none">
         <span class="mt-6px inline-block h-75% w-2px bg-list_divider" />
       </div>
       <AppInput ref="input" v-model:inputValue="inputAmount" class="ms-1 w-70%" />
