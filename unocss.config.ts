@@ -16,7 +16,7 @@ import { presetExtra } from 'unocss-preset-extra'
 export default defineConfig({
 
   shortcuts: [
-    ['btn', 'px-4 py-2 font-medium text-sm tracking-wide transition-colors text-white bg-primary_dark rounded-md border-none no-underline hover:bg-primary_darker dark:text-base focus:( outline-none ring ring-base_dark )'],
+    ['btn', 'px-4 py-2 font-medium text-sm tracking-wide transition-colors text-white bg-primary_dark rounded-md border-none no-underline hover:bg-primary_darker focus:( outline-none ring ring-base_dark )'],
     ['icon-btn', 'p-0 bg-transparent inline-block select-none border-none opacity-75 transition duration-200 ease-in-out hover:opacity-100'],
     ['form-input', 'w-full flex-1 appearance-none border border-gray-300 border-transparent rounded-lg bg-white dark:bg-secondary px-4 py-2 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary placeholder-gray-400'],
     ['list', 'list-disc list-inside'],

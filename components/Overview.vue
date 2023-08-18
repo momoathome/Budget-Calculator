@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref as dbRef, getDatabase, push, remove, set, update } from 'firebase/database'
+import { ref as dbRef, getDatabase, push, remove, update } from 'firebase/database'
 
 type IncomeExpenseItem = {
   amount: number
@@ -26,59 +26,6 @@ const authUser = useCurrentUser()
 const firebaseApp = useFirebaseApp()
 const db = getDatabase(firebaseApp)
 const userRef = dbRef(db, `users/${authUser.value?.uid}`)
-
-function setInitialUserData() {
-  /*
-    TODO: remove the remove function when reset is not needed anymore
-    TODO: set Config in DB and to true or false to determine if initial data should be set
-  */
-
-  remove(userRef)
-
-  set(userRef, {
-    incomes: {
-      Income: {
-        'EU-Income-Test': {
-          text: 'Paycheck',
-          amount: 1_000,
-        },
-      },
-    },
-    expenses: {
-      'Bills': {
-        'EU-Expenses-Bills-Test': {
-          text: 'Miete',
-          amount: 500,
-        },
-      },
-      'Living': {
-        'EU-Expenses-Living-Test': {
-          text: 'Lebensmittel',
-          amount: 200,
-        },
-      },
-      'Entertainment': {
-        'EU-Expenses-Ente-Test': {
-          text: 'Netflix',
-          amount: 11,
-        },
-      },
-      'Other Expenses': {
-        'EU-Expenses-Other-Test': {
-          text: 'iCloud',
-          amount: 2.5,
-        },
-      },
-      'Savings': {
-        'EU-Expenses-Savings-Test': {
-          text: 'Fester Wert',
-          amount: 50,
-        },
-      },
-    },
-  })
-}
-// setInitialUserData()
 
 const { data: users, pending, promise: usersPromise } = useDatabaseObject<FirebaseUser>(userRef)
 await usersPromise.value
@@ -156,19 +103,8 @@ const { locale: _, t } = useI18n()
 
 <template>
   <!-- eslint-disable vue/no-extra-parens -->
-  <div class="absolute left-8 top-24 rounded-md px-8 py-6 shadow-lg dark:bg-secondary">
-    <p class="m-0 mb-4 text-xl font-600">
-      Test Menu
-    </p>
-    <div class="flex flex-col gap-4">
-      <button class="btn" @click="setInitialUserData()">
-        reset
-      </button>
-      <button class="btn" @click="onSubmit('Living', 'test', 20)">
-        testValues
-      </button>
-    </div>
-  </div>
+
+  <app-test-comp />
 
   <main flex="~ 1 col" gap="8 lg:20" m="t-16">
     <div class="flex flex-col items-center">
@@ -188,6 +124,7 @@ const { locale: _, t } = useI18n()
           {{ t("main.income") }}
           <span class="font-extrabold">{{ numberFormat(user.totalIncome) }}</span>
         </h3>
+
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <income-expense-list
             v-for="(item, key) in user.data.incomes" :key="key" :data="item" :category="(key as string)"
@@ -201,6 +138,7 @@ const { locale: _, t } = useI18n()
           {{ t("main.expenses") }}
           <span class="font-extrabold">{{ numberFormat(user.totalExpenses) }}</span>
         </h3>
+
         <div class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-center gap-12">
           <income-expense-list
             v-for="(item, key) in user.data.expenses" :key="key" :data="item" :category="(key as string)"
