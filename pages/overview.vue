@@ -3,6 +3,7 @@ const authUser = useCurrentUser()
 </script>
 
 <template>
-  <the-navbar />
+  <TheNavbar />
   <Overview v-if="authUser" />
+  <TheFooter />
 </template>

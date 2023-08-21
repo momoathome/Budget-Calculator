@@ -19,8 +19,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div font="text">
-    <NuxtLoadingIndicator />
+  <div font="text" class="min-h-100dvh flex flex-col">
+    <!-- <NuxtLoadingIndicator /> -->
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

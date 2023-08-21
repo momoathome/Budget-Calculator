@@ -106,7 +106,7 @@ const { locale: _, t } = useI18n()
 
   <app-test-comp />
 
-  <main flex="~ 1 col" gap="8 lg:20" m="t-16">
+  <main class="mb-24 mt-16 flex flex-1 flex-col gap-8 lg:gap-20">
     <div class="flex flex-col items-center">
       <div class="w-max">
         <h1 class="m-0 text-2xl">
@@ -119,7 +119,7 @@ const { locale: _, t } = useI18n()
     </div>
 
     <div class="flex flex-col gap-20 px-6 xl:px-12">
-      <div class="flex flex-col">
+      <div>
         <h3 class="mb-8 flex justify-center gap-8 text-2xl">
           {{ t("main.income") }}
           <span class="font-extrabold">{{ numberFormat(user.totalIncome) }}</span>
@@ -133,7 +133,7 @@ const { locale: _, t } = useI18n()
         </div>
       </div>
 
-      <div class="flex flex-col">
+      <div>
         <h3 class="mb-8 flex justify-center gap-8 text-2xl">
           {{ t("main.expenses") }}
           <span class="font-extrabold">{{ numberFormat(user.totalExpenses) }}</span>
