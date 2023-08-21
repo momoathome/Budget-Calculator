@@ -39,7 +39,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vue-macros/nuxt',
     '@unocss/nuxt',
-    '@nuxtjs/color-mode',
     '@nuxt/image-edge',
     '@nuxt/devtools',
     '@pinia/nuxt',
