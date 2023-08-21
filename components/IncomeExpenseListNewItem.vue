@@ -39,7 +39,7 @@ function locales() {
 </script>
 
 <template>
-  <li class="cashlist-item text-primary">
+  <li class="text-primary cashlist-item">
     <form action="" class="relative flex" @submit.prevent="onSubmit">
       <AppInput :key="category + 1" v-model:inputValue="inputValue" :placeholder="locales()" class="me-1 w-full outline-primary! placeholder:text-primary!" />
       <div class="pointer-events-none">
@@ -47,7 +47,9 @@ function locales() {
       </div>
       <AppInput :key="category + 2" v-model:inputValue="inputAmount" :placeholder="t('inputs.amount')" class="ms-1 w-70% outline-primary! placeholder:text-primary!" min="0" step="0.01" />
 
-      <button type="submit" class="absolute right-4 top-5 text-2xl" prevent="default" i-tabler-circle-plus />
+      <button type="submit" class="absolute right-4 top-5 icon-btn" prevent="default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0m6 0h6m-3-3v6" /></svg>
+      </button>
     </form>
   </li>
 </template>
