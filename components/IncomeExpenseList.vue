@@ -6,6 +6,8 @@ type ObjIncomeExpenseItem = {
 type ObjData = {
   [key: string]: ObjIncomeExpenseItem
 }
+type sortKey = 'text' | 'amount'
+
 const props = defineProps<{
   category: string
   totalValuePerKey: number
@@ -15,19 +17,15 @@ const props = defineProps<{
 const emit = defineEmits(['submit', 'delete', 'update'])
 
 const sortOrder = ref('ascending')
-const sortKey = ref('text')
+const sortByKey = ref<sortKey>('text')
 
-function toggleSortByText() {
-  sortKey.value = 'text'
-  sortOrder.value = sortOrder.value === 'ascending' ? 'descending' : 'ascending'
-}
-function toggleSortByAmount() {
-  sortKey.value = 'amount'
+function toggleSortByKey(key: sortKey) {
+  sortByKey.value = key
   sortOrder.value = sortOrder.value === 'ascending' ? 'descending' : 'ascending'
 }
 
 const sortItems = computed(() => {
-  const sortFunction = sortKey.value === 'amount'
+  const sortFunction = sortByKey.value === 'amount'
     ? (itemA: { amount: number }, itemB: { amount: number }) => itemA.amount - itemB.amount
     : (itemA: { text: string }, itemB: { text: string }) => itemA.text.localeCompare(itemB.text)
 
@@ -77,11 +75,11 @@ const isHovered = useElementHover(categoryInfo)
 
       <div class="relative mx-4 h-1rem">
         <div class="flex gap-1">
-          <button class="icon-btn" @click="toggleSortByText()">
+          <button class="icon-btn" @click="toggleSortByKey('text')">
             <div v-if="sortOrder === 'ascending'" i-tabler:sort-ascending-letters class="text-xl" />
             <div v-else i-tabler:sort-descending-letters class="text-xl" />
           </button>
-          <button class="icon-btn" @click="toggleSortByAmount()">
+          <button class="icon-btn" @click="toggleSortByKey('amount')">
             <div v-if="sortOrder === 'ascending'" i-tabler:sort-ascending-numbers class="text-xl" />
             <div v-else i-tabler:sort-descending-numbers class="text-xl" />
           </button>
