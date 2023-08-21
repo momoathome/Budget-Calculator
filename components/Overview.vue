@@ -104,7 +104,9 @@ const { locale: _, t } = useI18n()
 <template>
   <!-- eslint-disable vue/no-extra-parens -->
 
-  <app-test-comp />
+  <DevOnly>
+    <app-test-comp />
+  </DevOnly>
 
   <main class="mb-24 mt-16 flex flex-1 flex-col gap-8 lg:gap-20">
     <div class="flex flex-col items-center">

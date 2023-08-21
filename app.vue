@@ -20,7 +20,6 @@ onMounted(() => {
 
 <template>
   <div font="text" class="min-h-100dvh flex flex-col">
-    <!-- <NuxtLoadingIndicator /> -->
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

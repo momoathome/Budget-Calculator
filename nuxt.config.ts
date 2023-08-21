@@ -28,6 +28,9 @@ export default defineNuxtConfig({
   // uncomment to disable SSR. This will basically make the app a SPA, like a normal Vue app, but with all the Nuxt goodies
   ssr: false,
 
+  // uncomment to disable the SPA loading animation.
+  spaLoadingTemplate: false,
+
   // global CSS files
   css: ['~/assets/normalize.css', '~/assets/main.css'],
 
