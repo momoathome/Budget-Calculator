@@ -33,8 +33,8 @@ function register() {
     })
 }
 
-function testRegister() {
-  signInWithEmailAndPassword(auth, 'giveheb472@v1zw.com', 'test1234')
+function testLogin() {
+  signInWithEmailAndPassword(auth, 'haushalttest@test.com', 'test1234')
     .then((data) => {
     // Signed in
       router.push('/overview')
@@ -72,7 +72,7 @@ const onShowRegister = () => emit('showRegister')
           </div>
         </form>
         <div class="flex justify-end">
-          <button type="button" class="bg-primary_darkerer hover:bg-primary_darkest btn dark:text-base_dark" @click="testRegister">
+          <button type="button" class="bg-primary_darkerer btn hover:bg-primary_darkest dark:text-base_dark" @click="testLogin">
             test Login
           </button>
         </div>
