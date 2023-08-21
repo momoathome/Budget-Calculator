@@ -26,7 +26,7 @@ function toggleSortByAmount() {
   sortOrder.value = sortOrder.value === 'ascending' ? 'descending' : 'ascending'
 }
 
-function sortItems() {
+const sortItems = computed(() => {
   const sortFunction = sortKey.value === 'amount'
     ? (itemA: { amount: number }, itemB: { amount: number }) => itemA.amount - itemB.amount
     : (itemA: { text: string }, itemB: { text: string }) => itemA.text.localeCompare(itemB.text)
@@ -39,7 +39,7 @@ function sortItems() {
     .reduce((acc, [key, item]) => ({ ...acc, [key]: item }), {})
 
   return sortedItems
-}
+})
 
 function submitNewIncomeExpenseItem(inputValue: string, inputAmount: number) {
   emit('submit', props.category, inputValue, inputAmount)
@@ -91,7 +91,7 @@ const isHovered = useElementHover(categoryInfo)
 
     <transition-group name="list" tag="ul" class="relative my-2 max-w-md ps-0">
       <!--  eslint-disable-next-line vue/no-extra-parens -->
-      <income-expense-list-item v-for="(item, key) in sortItems()" :key="key" :data-key="(key as string)" :item="item" :category="category" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />
+      <income-expense-list-item v-for="(item, key) in sortItems" :key="key" :data-key="(key as string)" :item="item" :category="category" @update="updateIncomeExpenseItem" @delete="deleteIncomeExpenseItem" />
       <income-expense-list-new-item :key="category" :category="category" @submit="submitNewIncomeExpenseItem" />
     </transition-group>
   </div>
