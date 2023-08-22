@@ -59,30 +59,31 @@ const isHovered = useElementHover(categoryInfo)
   <div class="relative mx-auto">
     <div class="me-2 flex flex-col">
       <div class="flex px-4 text-(xl primary) font-600">
-        <h4 class="m-0">
+        <h4 class="m-0 flex-grow-1 md:flex-grow-0">
           {{ t(`list.${props.category.toLowerCase()}`) }}
         </h4>
-        <div class="flex-grow-1">
+        <div class="hidden flex-grow-1 md:block">
           <span ref="categoryInfo" i="tabler-info-circle" class="ms-1 text-xl" />
           <AppCategoryInfo v-if="isHovered">
             {{ t(`info.${props.category.toLowerCase()}`) }}
           </AppCategoryInfo>
         </div>
-        <span>
-          {{ numberFormat(totalValuePerKey) }}
-        </span>
-      </div>
-
-      <div class="relative mx-4 h-1rem">
-        <div class="flex gap-1">
-          <button class="icon-btn" @click="toggleSortByKey('text')">
-            <div v-if="sortOrder === 'ascending'" i-tabler:sort-ascending-letters class="text-xl" />
-            <div v-else i-tabler:sort-descending-letters class="text-xl" />
-          </button>
-          <button class="icon-btn" @click="toggleSortByKey('amount')">
-            <div v-if="sortOrder === 'ascending'" i-tabler:sort-ascending-numbers class="text-xl" />
-            <div v-else i-tabler:sort-descending-numbers class="text-xl" />
-          </button>
+        <div class="flex gap-2">
+          <span>
+            {{ numberFormat(totalValuePerKey) }}
+          </span>
+          <div class="hidden text-base_dark md:block">
+            <div class="flex gap-1">
+              <button class="icon-btn" @click="toggleSortByKey('text')">
+                <div v-if="sortOrder === 'ascending'" i-tabler:sort-ascending-letters class="text-xl" />
+                <div v-else i-tabler:sort-descending-letters class="text-xl" />
+              </button>
+              <button class="icon-btn" @click="toggleSortByKey('amount')">
+                <div v-if="sortOrder === 'ascending'" i-tabler:sort-ascending-numbers class="text-xl" />
+                <div v-else i-tabler:sort-descending-numbers class="text-xl" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
