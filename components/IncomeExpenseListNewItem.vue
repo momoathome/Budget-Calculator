@@ -58,4 +58,5 @@ function locales() {
 </template>
 
 <style scoped>
+
 </style>

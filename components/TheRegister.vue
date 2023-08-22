@@ -74,7 +74,7 @@ const onShowLogin = () => emit('showLogin')
 
 <template>
   <div class="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
-    <div class="w-full rounded-lg shadow-elevation-7 md:mt-0 sm:max-w-md dark:bg-base">
+    <div class="w-full rounded-lg bg-base shadow-elevation-7 md:mt-0 sm:max-w-md dark:bg-base">
       <div class="p-6 space-y-4 sm:p-8 md:space-y-6">
         <h1 class="m-0 text-xl font-bold md:text-2xl">
           {{ t('auth.register') }}
