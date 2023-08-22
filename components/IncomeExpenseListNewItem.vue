@@ -17,6 +17,8 @@ function onInput(e) {
 // Vue 3.3 Experimental
 const inputValue = ref<string>()
 const inputAmount = ref<string>()
+const input = ref()
+const { focused } = useFocus(input)
 
 function onSubmit() {
   if (inputValue.value === '' || inputValue.value === undefined || inputAmount.value === undefined || inputAmount.value === null)
@@ -28,6 +30,7 @@ function onSubmit() {
   emit('submit', inputValue.value, parseLocaleNumber(inputAmount.value))
   inputValue.value = ''
   inputAmount.value = ''
+  focused.value = true
 }
 
 const { locale: _, t } = useI18n()
@@ -41,7 +44,7 @@ function locales() {
 <template>
   <li class="text-primary cashlist-item">
     <form action="" class="relative flex" @submit.prevent="onSubmit">
-      <AppInput :key="category + 1" v-model:inputValue="inputValue" :placeholder="locales()" class="me-1 w-full outline-primary! placeholder:text-primary!" />
+      <AppInput :key="category + 1" ref="input" v-model:inputValue="inputValue" :placeholder="locales()" class="me-1 w-full outline-primary! placeholder:text-primary!" />
       <div class="pointer-events-none">
         <span class="mt-6px inline-block h-75% w-2px bg-list_divider" />
       </div>
