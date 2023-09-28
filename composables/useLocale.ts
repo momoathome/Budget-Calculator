@@ -1,5 +1,3 @@
-import type { Ref } from 'vue'
-
 export default function useLocale(fallback = 'Deutsch'): Ref<string> {
   const preferredLanguages = $(usePreferredLanguages())
 

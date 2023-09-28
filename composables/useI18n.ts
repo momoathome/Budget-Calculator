@@ -1,4 +1,3 @@
-import type { Ref } from 'vue'
 import { useI18n as _useI18n } from 'vue-i18n'
 
 export interface UseI18nComposer {
