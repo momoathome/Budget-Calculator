@@ -6,7 +6,7 @@ const authUser = useCurrentUser()
 </script>
 
 <template>
-  <header class="box-shadow sticky left-0 top-0 z-10 h-70px flex justify-between bg-base px-4 lg:(static px-12) md:items-center">
+  <header class="box-shadow relative sticky left-0 top-0 z-1000 h-70px flex justify-between bg-base px-4 md:items-center lg:px-12">
     <div class="flex">
       <!-- Logo -->
       <nuxt-link
